@@ -1,0 +1,16 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EVITA LA CALL CHE POTEVA ESSERE UNA MAIL</title><style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:#fff}body{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.stage{position:relative;width:100vw;height:100svh;min-height:100vh;background:#000;overflow:hidden}.title{position:absolute;top:clamp(22px,4vh,48px);left:50%;transform:translateX(-50%);max-width:88vw;text-align:center;font-size:clamp(15px,2.1vmin,24px);letter-spacing:.12em;font-weight:700;white-space:nowrap;color:#fff}.center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(70vmin,560px);height:min(54vmin,420px);display:grid;place-items:center}.status{position:absolute;left:8%;right:8%;bottom:16%;text-align:center;font-size:clamp(12px,1.6vmin,18px);opacity:.92}.result{position:absolute;left:8%;right:8%;bottom:9%;text-align:center;font-size:clamp(13px,1.8vmin,20px);opacity:0;animation:show .25s 5.6s forwards}.logo{position:absolute;inset:0;display:grid;place-items:center;background:#000;opacity:0;z-index:20;animation:logoIn 2.8s 7.9s forwards}.logo img{width:min(62vw,420px);max-height:52vh;object-fit:contain}@keyframes show{to{opacity:1}}@keyframes logoIn{0%{opacity:0}10%{opacity:1}90%{opacity:1}100%{opacity:1}}@media(orientation:landscape){.center{width:min(52vh,560px);height:min(46vh,400px)}.logo img{width:min(34vw,420px)}}@media(max-width:640px){.title{white-space:normal;line-height:1.25}}:root{--a:#ff8c42}.call{width:min(72vw,420px);text-align:center}.mins{font-size:clamp(54px,12vmin,96px);font-weight:700;color:var(--a);animation:minutes 5.2s steps(4,end) .3s forwards}.label{margin:12px 0 22px;color:#888;font-size:13px;letter-spacing:.12em}.track{height:4px;background:#222}.track i{display:block;height:100%;width:5%;background:var(--a);animation:callbar 5.2s steps(4,end) .3s forwards}@keyframes callbar{to{width:78%}}@keyframes minutes{0%{filter:none}25%{transform:scale(1.04)}50%{transform:scale(.98)}75%{transform:scale(1.03)}100%{transform:none}}</style></head><body><main class="stage"><div class="title">EVITA LA CALL CHE POTEVA ESSERE UNA MAIL</div><div class="center"><div class="call"><div class="mins">5</div><div class="label">MINUTI DI CALL</div><div class="track"><i></i></div></div></div><div class="status">CALCOLANDO I MINUTI PERSI...</div><div class="result">LA MAIL È DURATA MENO DELLA CALL.</div><div class="logo"><img src="useless-studio-logo.png" alt="Useless Studio"></div></main>
+<script>
+setTimeout(function(){
+  // ferma QUALUNQUE timer JS residuo del file (setInterval/setTimeout),
+  // non solo le animazioni CSS: alcuni file usano loop in JS per cambiare
+  // il contenuto (es. setInterval), che altrimenti continuerebbero a
+  // girare dopo il segnale di fine, causando un flash residuo.
+  try {
+    var killId = setInterval(function(){}, 1 << 30);
+    for (var i = 0; i <= killId; i++) { clearInterval(i); clearTimeout(i); }
+  } catch (e) {}
+  try { window.parent.postMessage('splash-done','*'); } catch (e) {}
+}, 10720);
+</script>
+</body></html>

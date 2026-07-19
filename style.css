@@ -1,0 +1,363 @@
+/* ── TOKENS ── */
+:root {
+  --bg:    #ffffff;
+  --ink:   #111111;
+  --muted: #aaaaaa;
+  --dim:   #dddddd;
+  --paper: #f5f5f5;
+  --rule:  1px solid #111111;
+  --rule-light: 1px solid #eeeeee;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 52px; /* compensate fixed install bar */
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.topbar-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.wa-btn {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.wa-btn:hover { opacity: .5; }
+
+/* ── HERO — tutto centrato ── */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px 32px;
+  gap: 0;
+}
+
+h1 {
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: clamp(64px, 22vw, 96px);
+  font-weight: 800;
+  line-height: .78;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* separatore verticale sottile */
+.sep {
+  width: 1px;
+  height: 32px;
+  background: var(--dim);
+  margin: 0 auto 32px;
+}
+
+/* label sopra la card */
+.card-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* GAME CARD — nessuna cornice, solo testo centrato */
+.game-card {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  cursor: default;
+  transition: opacity .15s;
+}
+.game-card.spinning { opacity: .5; }
+.game-card.playable { cursor: pointer; }
+
+.game-card h2 {
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: clamp(22px, 8vw, 32px);
+  font-weight: 800;
+  line-height: .9;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.game-card p#gameDesc {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  max-width: 240px;
+}
+
+.status {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* GIRA → */
+#spinBtn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  padding: 14px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: opacity .12s;
+  margin-bottom: 20px;
+}
+#spinBtn:hover  { opacity: .75; }
+#spinBtn:active { opacity: .55; }
+
+/* ── ARCHIVE ── */
+.archive {
+  width: 100%;
+  max-width: 320px;
+}
+
+summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  transition: color .12s;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '↓';
+  font-size: 11px;
+  font-weight: 400;
+  transition: transform .2s;
+  display: inline-block;
+}
+details[open] > summary::after { transform: rotate(180deg); }
+summary:hover { color: var(--ink); }
+
+/* GRID — 2 colonne dentro max-width */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: var(--rule);
+  margin-top: 16px;
+  width: 100%;
+}
+
+.mini {
+  padding: 12px 14px;
+  border-right: var(--rule);
+  border-bottom: var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  transition: background .1s;
+  background: #fff;
+}
+.mini:nth-child(2n) { border-right: none; }
+.mini:nth-last-child(-n+2) { border-bottom: none; }
+.mini:hover { background: var(--paper); }
+
+.mini-num {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--dim);
+}
+.mini h3 {
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+.mini p {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+/* mini-arrow non usato in questo layout — tenuto per compatibilità JS */
+.mini-arrow { display: none; }
+
+/* ── INSTALL BAR (fixed bottom) ── */
+.install-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  border-top: var(--rule);
+  background: var(--bg);
+}
+.install-bar[hidden] { display: none; }
+
+.install-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  gap: 10px;
+}
+.install-toggle:hover { color: var(--ink); }
+
+.install-toggle-label { text-align: center; flex: 1; }
+
+.install-arrow {
+  position: absolute;
+  right: 24px;
+  display: inline-block;
+  transition: transform .25s ease;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.install-bar.open .install-arrow { transform: rotate(180deg); }
+
+.install-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .3s ease;
+}
+.install-bar.open .install-panel {
+  grid-template-rows: 1fr;
+  border-top: var(--rule);
+}
+.install-panel-inner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.install-platform {
+  padding: 16px 20px;
+  border-right: var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.install-platform:last-child { border-right: none; }
+
+.install-platform-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.install-platform-text {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.install-platform-text b {
+  font-weight: 700;
+  border-bottom: 1px solid var(--ink);
+}
+
+.install-footer {
+  border-top: var(--rule);
+  padding: 6px 24px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .install-panel-inner { grid-template-columns: 1fr; }
+  .install-platform { border-right: none; border-bottom: var(--rule); }
+  .install-platform:last-child { border-bottom: none; }
+}
+
+@media (max-width: 480px) {
+  .topbar { padding: 12px 16px; }
+  .hero { padding: 32px 16px 24px; }
+  h1 { font-size: clamp(52px, 18vw, 80px); margin-bottom: 32px; }
+  .archive { max-width: 100%; }
+  .grid { max-width: 100%; }
+  #spinBtn { max-width: 100%; }
+  .game-card { max-width: 100%; }
+  .install-toggle { padding: 10px 16px; }
+}

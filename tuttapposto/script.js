@@ -1,0 +1,2 @@
+const risposte=['Respira. E gia quasi una soluzione.','Tutto recuperabile. Anche se non sembra.','Non e la fine del mondo. E solo un suo trailer.','Stai andando bene. In modo caotico, ma bene.','Domani questa cosa avra meno volume.','Andra tutto bene. E se non va bene, lo chiameremo esperienza.','Hai gia superato cose piu assurde.','La situazione e gestibile. Tu un po meno, ma ci lavoriamo.'];
+document.getElementById('btn').onclick=()=>document.getElementById('out').textContent=risposte[Math.floor(Math.random()*risposte.length)];

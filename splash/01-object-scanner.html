@@ -1,0 +1,15 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>OBJECT SCAN</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:#fff}body{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.stage{position:relative;width:100vw;height:100svh;min-height:100vh;background:#000;overflow:hidden}.title{position:absolute;top:clamp(22px,4vh,48px);left:50%;transform:translateX(-50%);font-size:clamp(16px,2.1vmin,24px);letter-spacing:.12em;font-weight:700;white-space:nowrap;color:#fff}.center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(70vmin,560px);height:min(54vmin,420px);display:grid;place-items:center}.status{position:absolute;left:8%;right:8%;bottom:16%;text-align:center;font-size:clamp(12px,1.6vmin,18px);opacity:.92}.result{position:absolute;left:8%;right:8%;bottom:9%;text-align:center;font-size:clamp(13px,1.8vmin,20px);line-height:1.4;opacity:0;animation:show .25s 5.6s forwards}.logo{position:absolute;inset:0;display:grid;place-items:center;background:#000;opacity:0;z-index:20;animation:logoIn 2.8s 7.9s forwards}.logo img{width:min(62vw,420px);max-height:52vh;object-fit:contain}@keyframes show{to{opacity:1}}@keyframes logoIn{0%{opacity:0}10%{opacity:1}90%{opacity:1}100%{opacity:1}}@media(orientation:landscape){.center{width:min(52vh,560px);height:min(46vh,400px)}.logo img{width:min(34vw,420px)}}:root{--a:#39ff88}.scanbox{width:220px;height:160px;border:2px solid #fff;position:relative;display:grid;place-items:center}.obj{width:86px;height:70px;border:2px solid #fff;border-radius:45% 55% 52% 48%;animation:objectPulse 1s 1s 4}.laser{position:absolute;left:0;right:0;height:2px;background:var(--a);box-shadow:0 0 12px var(--a);animation:scan 4.7s .4s ease-in-out forwards}@keyframes scan{0%{top:10%}50%{top:88%}100%{top:42%;opacity:0}}@keyframes objectPulse{50%{transform:scale(1.03)}}</style></head><body><main class="stage"><div class="title">OBJECT SCAN</div><div class="center"><div class="scanbox"><div class="obj"></div><div class="laser"></div></div></div><div class="status">ANALIZZANDO L’OGGETTO...</div><div class="result">OGGETTO UFFICIALMENTE INUTILE.</div><div class="logo"><img src="useless-studio-logo.png" alt="Useless Studio"></div></main>
+<script>
+setTimeout(function(){
+  // ferma QUALUNQUE timer JS residuo del file (setInterval/setTimeout),
+  // non solo le animazioni CSS: alcuni file usano loop in JS per cambiare
+  // il contenuto (es. setInterval), che altrimenti continuerebbero a
+  // girare dopo il segnale di fine, causando un flash residuo.
+  try {
+    var killId = setInterval(function(){}, 1 << 30);
+    for (var i = 0; i <= killId; i++) { clearInterval(i); clearTimeout(i); }
+  } catch (e) {}
+  try { window.parent.postMessage('splash-done','*'); } catch (e) {}
+}, 10720);
+</script>
+</body></html>

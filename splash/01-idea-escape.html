@@ -1,0 +1,15 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>IDEA CONTAINMENT</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:#fff}body{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.stage{position:relative;width:100vw;height:100svh;min-height:100vh;background:#000;overflow:hidden}.title{position:absolute;top:clamp(22px,4vh,48px);left:50%;transform:translateX(-50%);font-size:clamp(16px,2.1vmin,24px);letter-spacing:.12em;font-weight:700;white-space:nowrap;color:#fff}.center{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(70vmin,560px);height:min(54vmin,420px);display:grid;place-items:center}.status{position:absolute;left:8%;right:8%;bottom:16%;text-align:center;font-size:clamp(12px,1.6vmin,18px);opacity:.92}.result{position:absolute;left:8%;right:8%;bottom:9%;text-align:center;font-size:clamp(13px,1.8vmin,20px);line-height:1.4;opacity:0;animation:show .25s 5.6s forwards}.logo{position:absolute;inset:0;display:grid;place-items:center;background:#000;opacity:0;z-index:20;animation:logoIn 2.8s 7.9s forwards}.logo img{width:min(62vw,420px);max-height:52vh;object-fit:contain}@keyframes show{to{opacity:1}}@keyframes logoIn{0%{opacity:0}10%{opacity:1}90%{opacity:1}100%{opacity:1}}@media(orientation:landscape){.center{width:min(52vh,560px);height:min(46vh,400px)}.logo img{width:min(34vw,420px)}}:root{--a:#ff5e7d}.escape{position:relative;width:260px;height:220px}.jar{position:absolute;left:65px;bottom:20px;width:130px;height:145px;border:2px solid #fff;border-radius:12px 12px 35px 35px}.lid{position:absolute;left:58px;top:42px;width:144px;height:18px;border:2px solid #fff;animation:lid 4.7s .4s ease-in-out forwards}.idea{position:absolute;left:112px;top:110px;color:var(--a);font-size:42px;font-style:normal;animation:fly 4.7s .4s ease-in-out forwards}@keyframes fly{0%,20%{transform:translate(0,0);opacity:1}75%,100%{transform:translate(72px,-108px) rotate(180deg);opacity:.12}}@keyframes lid{0%,25%{transform:none}55%,100%{transform:translate(35px,-25px) rotate(22deg)}}</style></head><body><main class="stage"><div class="title">IDEA CONTAINMENT</div><div class="center"><div class="escape"><div class="jar"></div><i class="idea">✦</i><span class="lid"></span></div></div><div class="status">CONTENENDO L’IDEA...</div><div class="result">L’IDEA È SCAPPATA.</div><div class="logo"><img src="useless-studio-logo.png" alt="Useless Studio"></div></main>
+<script>
+setTimeout(function(){
+  // ferma QUALUNQUE timer JS residuo del file (setInterval/setTimeout),
+  // non solo le animazioni CSS: alcuni file usano loop in JS per cambiare
+  // il contenuto (es. setInterval), che altrimenti continuerebbero a
+  // girare dopo il segnale di fine, causando un flash residuo.
+  try {
+    var killId = setInterval(function(){}, 1 << 30);
+    for (var i = 0; i <= killId; i++) { clearInterval(i); clearTimeout(i); }
+  } catch (e) {}
+  try { window.parent.postMessage('splash-done','*'); } catch (e) {}
+}, 10720);
+</script>
+</body></html>
