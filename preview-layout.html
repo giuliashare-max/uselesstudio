@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposta 3 — Pop Polveroso</title>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #d4cfc4;   /* grigio caldo polveroso */
+      --ink:     #1a1a18;
+      --lime:    #b8c94a;   /* lime acido slavato */
+      --coral:   #d96b52;   /* corallo polveroso */
+      --lilac:   #a890c4;   /* lilla opaco */
+      --cyan:    #6bbcb8;   /* ciano consumato */
+      --yellow:  #d9c040;   /* giallo acido polveroso */
+      --paper:   #e8e3d8;   /* carta bianca sporca */
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Space Grotesk', Arial, sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .credit {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6a6660;
+    }
+
+    /* ── HERO GRID ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    /* BIG TITLE CELL */
+    .hero-title {
+      padding: 40px 36px 36px;
+      border-right: 2px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-title h1 {
+      font-size: clamp(56px, 8vw, 104px);
+      font-weight: 800;
+      line-height: .85;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-title h1 span {
+      display: block;
+    }
+
+    .hero-title h1 .accent {
+      color: var(--lime);
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      font-weight: 400;
+      color: #5a5750;
+      line-height: 1.5;
+      max-width: 300px;
+    }
+
+    /* ROULETTE CELL */
+    .hero-roulette {
+      background: var(--lime);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .game-card {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 28px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .game-card h2 {
+      font-size: clamp(40px, 7vw, 80px);
+      font-weight: 800;
+      line-height: .85;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .game-card p {
+      font-size: 13px;
+      font-weight: 400;
+      color: #5a5750;
+      line-height: 1.5;
+    }
+
+    .hint {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #1a1a18aa;
+      margin-top: 4px;
+    }
+
+    .spin-btn {
+      background: var(--ink);
+      color: var(--lime);
+      font-family: 'Space Grotesk', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      padding: 16px 24px;
+      cursor: pointer;
+      transition: .12s;
+      width: 100%;
+    }
+
+    .spin-btn:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    /* ── GAMES GRID ── */
+    .games-section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .game-tile {
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: .12s;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .game-tile:nth-child(4n) { border-right: none; }
+    .game-tile:nth-child(n+5) { border-bottom: none; }
+
+    .game-tile:hover { filter: brightness(.95); }
+
+    .game-tile:nth-child(1) { background: var(--coral); }
+    .game-tile:nth-child(2) { background: var(--paper); }
+    .game-tile:nth-child(3) { background: var(--yellow); }
+    .game-tile:nth-child(4) { background: var(--paper); }
+    .game-tile:nth-child(5) { background: var(--paper); }
+    .game-tile:nth-child(6) { background: var(--cyan); }
+    .game-tile:nth-child(7) { background: var(--paper); }
+    .game-tile:nth-child(8) { background: var(--lilac); }
+
+    .tile-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #1a1a1855;
+    }
+
+    .tile-title {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .tile-desc {
+      font-size: 11px;
+      font-weight: 400;
+      color: #1a1a18bb;
+      line-height: 1.4;
+    }
+
+    .tile-arrow {
+      margin-top: auto;
+      font-size: 18px;
+      padding-top: 12px;
+      color: #1a1a18aa;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 2px solid var(--ink);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #6a6660;
+    }
+
+    .footer-dots {
+      display: flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <div class="topbar-left">
+      <div class="dot" style="background:var(--coral); border:2px solid var(--ink)"></div>
+      <div class="dot" style="background:var(--yellow); border:2px solid var(--ink)"></div>
+      <div class="dot" style="background:var(--cyan); border:2px solid var(--ink)"></div>
+      <span class="eyebrow">micro-app inutili ma necessarie</span>
+    </div>
+    <span class="credit">©g_htno</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-title">
+      <h1>
+        <span>GIOCA</span>
+        <span>CON</span>
+        <span class="accent">ME</span>
+      </h1>
+      <p class="hero-sub">Non scegliere. Lascia decidere al caos.</p>
+    </div>
+
+    <div class="hero-roulette">
+      <div class="game-card">
+        <h2>?</h2>
+        <p>Un gioco a caso apparirà qui, come una decisione presa male ma con stile.</p>
+        <span class="hint">↑ premi gira</span>
+      </div>
+      <button class="spin-btn">GIRA →</button>
+    </div>
+  </section>
+
+  <!-- GAMES GRID -->
+  <section class="games-section">
+    <div class="game-tile">
+      <span class="tile-num">01</span>
+      <span class="tile-title">LICENZIATI</span>
+      <span class="tile-desc">Dimissioni formalissime. Motivazioni sbagliatissime.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">02</span>
+      <span class="tile-title">VATTEL'APP</span>
+      <span class="tile-desc">La risposta è sempre no. Ma con personalità.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">03</span>
+      <span class="tile-title">TESTATE</span>
+      <span class="tile-desc">Chi ha torto? Spoiler: entrambi.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">04</span>
+      <span class="tile-title">PIZZICOTTA FILOSOFA</span>
+      <span class="tile-desc">Domande esistenziali, risposte dubbie.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">05</span>
+      <span class="tile-title">NIENTE</span>
+      <span class="tile-desc">Parli. Lei dice niente. Sempre.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">06</span>
+      <span class="tile-title">TUTT'APP</span>
+      <span class="tile-desc">Andrà tutto Apposto. Forse.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">07</span>
+      <span class="tile-title">BRIEF INFERNO</span>
+      <span class="tile-desc">Un brief impossibile. Tuo.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+    <div class="game-tile">
+      <span class="tile-num">08</span>
+      <span class="tile-title">COSE INUTILI DA SAPERE</span>
+      <span class="tile-desc">100 definizioni. 1 sola vita.</span>
+      <span class="tile-arrow">↗</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-label">Tutti i giochi — 8 disponibili</span>
+    <div class="footer-dots">
+      <div class="dot" style="background:var(--lime); border:2px solid var(--ink); width:10px; height:10px"></div>
+      <div class="dot" style="background:var(--coral); border:2px solid var(--ink); width:10px; height:10px"></div>
+      <div class="dot" style="background:var(--lilac); border:2px solid var(--ink); width:10px; height:10px"></div>
+    </div>
+  </footer>
+
+</body>
+</html>

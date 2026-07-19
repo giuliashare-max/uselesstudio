@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout D — Split</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#fff;color:#111;height:100vh;overflow:hidden}
+
+/* LAYOUT — due colonne fisse, altezza schermo */
+.shell{display:grid;grid-template-columns:1fr 1fr;height:100vh}
+
+/* COLONNA SINISTRA — titolo fisso */
+.left{
+  border-right:1px solid #111;
+  display:flex;flex-direction:column;
+  padding:16px 16px 14px;
+  overflow:hidden;
+}
+.left-top{
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid #111;padding-bottom:12px;margin-bottom:auto;
+}
+.brand{font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#ccc}
+.wa{font-size:8px;font-weight:800;background:none;border:none;cursor:pointer;font-family:inherit;color:#111;letter-spacing:.12em;text-transform:uppercase}
+
+h1{
+  font-size:clamp(44px,16vw,68px);
+  font-weight:800;line-height:.78;
+  letter-spacing:-.06em;text-transform:uppercase;
+  margin-top:auto;
+  /* titolo tocca il fondo */
+  align-self:flex-end;
+}
+
+/* COLONNA DESTRA — contenuto scorrevole */
+.right{
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.right::-webkit-scrollbar{display:none}
+
+/* sezione card */
+.section{border-bottom:1px solid #111;padding:16px}
+.section-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#ccc;margin-bottom:10px}
+
+.card-title{font-size:clamp(18px,6vw,24px);font-weight:800;letter-spacing:-.04em;text-transform:uppercase;line-height:.9;word-break:break-word;margin-bottom:6px}
+.card-desc{font-size:9.5px;color:#888;line-height:1.55;margin-bottom:12px}
+.spin{
+  display:block;width:100%;
+  padding:11px;background:#111;color:#fff;
+  font-family:inherit;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;
+}
+
+/* griglia app */
+.grid{display:grid;grid-template-columns:1fr}
+.mini{
+  padding:11px 16px;
+  border-bottom:1px solid #eee;
+  text-decoration:none;color:#111;
+  display:flex;align-items:baseline;gap:8px;
+}
+.mini:last-child{border-bottom:none}
+.mini-num{font-size:8px;font-weight:800;letter-spacing:.14em;color:#ddd;min-width:18px}
+.mini-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;flex:1}
+.mini-arr{font-size:11px;color:#ccc}
+
+/* install — fissa in fondo colonna destra */
+.install{
+  margin-top:auto;
+  border-top:1px solid #111;
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#ccc;
+  flex-shrink:0;
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- sinistra: brand + titolo -->
+  <div class="left">
+    <div class="left-top">
+      <span class="brand">© US</span>
+      <button class="wa">WA</button>
+    </div>
+    <h1>Gioca<br>con<br>me.</h1>
+  </div>
+
+  <!-- destra: tutto il resto -->
+  <div class="right">
+
+    <div class="section">
+      <div class="section-label">In rotazione</div>
+      <div class="card-title">Piccione<br>Viaggiatore</div>
+      <div class="card-desc">Sistema di messaggistica lenta.</div>
+      <button class="spin">Gira →</button>
+    </div>
+
+    <div class="section" style="border-bottom:none">
+      <div class="section-label">Scegline un altro</div>
+    </div>
+    <div class="grid">
+      <a class="mini" href="#"><span class="mini-num">01</span><span class="mini-name">Licenziati</span><span class="mini-arr">↗</span></a>
+      <a class="mini" href="#"><span class="mini-num">02</span><span class="mini-name">Niente</span><span class="mini-arr">↗</span></a>
+      <a class="mini" href="#"><span class="mini-num">03</span><span class="mini-name">Cose Inutili</span><span class="mini-arr">↗</span></a>
+      <a class="mini" href="#"><span class="mini-num">04</span><span class="mini-name">Font Detective</span><span class="mini-arr">↗</span></a>
+      <a class="mini" href="#"><span class="mini-num">05</span><span class="mini-name">Piccione</span><span class="mini-arr">↗</span></a>
+      <a class="mini" href="#"><span class="mini-num">06</span><span class="mini-name">Final</span><span class="mini-arr">↗</span></a>
+    </div>
+
+    <div class="install">
+      <span>Home / dock</span>
+      <span>↑</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

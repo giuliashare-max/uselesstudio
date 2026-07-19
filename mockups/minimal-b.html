@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout B — Lista</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#fff;color:#111;min-height:100vh}
+body{padding-bottom:52px}
+
+/* ogni riga è una entry separata da una linea — zero bordi verticali */
+.row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:13px 20px;
+  border-bottom:1px solid #111;
+}
+
+/* brand row */
+.row-brand .label{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.row-brand .val{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+
+/* titolo — occupa la sua riga da solo */
+.row-title{padding:28px 20px 24px;border-bottom:1px solid #111;display:block}
+h1{
+  font-size:clamp(56px,20vw,88px);
+  font-weight:800;line-height:.8;
+  letter-spacing:-.05em;text-transform:uppercase;
+}
+
+/* card row — label a sinistra, titolo al centro, bottone a destra */
+.row-card{
+  padding:16px 20px;border-bottom:1px solid #111;
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:16px;
+}
+.card-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#aaa;white-space:nowrap}
+.card-name{font-size:clamp(14px,5vw,20px);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;line-height:1}
+.spin{padding:10px 16px;background:#111;color:#fff;font-family:inherit;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;white-space:nowrap}
+
+/* riga desc */
+.row-desc .label{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#ccc;white-space:nowrap}
+.row-desc .val{font-size:10px;color:#888;line-height:1.5;text-align:right}
+
+/* griglia app — solo righe */
+.app-list{}
+.app-row{
+  display:flex;align-items:baseline;gap:12px;
+  padding:11px 20px;border-bottom:1px solid #eee;
+  text-decoration:none;color:#111;
+}
+.app-row:last-child{border-bottom:1px solid #111}
+.app-num{font-size:9px;font-weight:800;letter-spacing:.14em;color:#ccc;min-width:22px}
+.app-name{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;flex:1}
+.app-desc{font-size:9px;color:#aaa;text-align:right}
+.app-arr{font-size:12px;color:#ccc;margin-left:6px}
+
+/* toggle riga */
+.row-toggle{cursor:pointer}
+.row-toggle .label{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.row-toggle .val{font-size:12px;color:#ccc}
+
+/* footer */
+.row-footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #111}
+.row-footer .label{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#aaa}
+.row-footer .val{font-size:10px;color:#aaa}
+</style>
+</head>
+<body>
+
+<div class="row row-brand">
+  <span class="label">© Useless Studio</span>
+  <span class="val">WA</span>
+</div>
+
+<div class="row-title">
+  <h1>Gioca<br>con<br>me.</h1>
+</div>
+
+<div class="row-card">
+  <span class="card-label">Ora</span>
+  <span class="card-name">Piccione Viaggiatore</span>
+  <button class="spin">Gira →</button>
+</div>
+
+<div class="row row-desc">
+  <span class="label">Desc</span>
+  <span class="val">Sistema di messaggistica lenta.</span>
+</div>
+
+<div class="row row-toggle" id="toggle" onclick="document.getElementById('applist').hidden=!document.getElementById('applist').hidden;this.querySelector('.val').textContent=document.getElementById('applist').hidden?'+':'−'">
+  <span class="label">Scegline un altro</span>
+  <span class="val">+</span>
+</div>
+
+<div class="app-list" id="applist" hidden>
+  <a class="app-row" href="#"><span class="app-num">01</span><span class="app-name">Licenziati</span><span class="app-desc">Dimissioni.</span><span class="app-arr">↗</span></a>
+  <a class="app-row" href="#"><span class="app-num">02</span><span class="app-name">Niente</span><span class="app-desc">Lei finge.</span><span class="app-arr">↗</span></a>
+  <a class="app-row" href="#"><span class="app-num">03</span><span class="app-name">Cose Inutili</span><span class="app-desc">100 def.</span><span class="app-arr">↗</span></a>
+  <a class="app-row" href="#"><span class="app-num">04</span><span class="app-name">Font Detective</span><span class="app-desc">Sans Serif?</span><span class="app-arr">↗</span></a>
+  <a class="app-row" href="#"><span class="app-num">05</span><span class="app-name">Piccione</span><span class="app-desc">Lento.</span><span class="app-arr">↗</span></a>
+  <a class="app-row" href="#"><span class="app-num">06</span><span class="app-name">Final</span><span class="app-desc">Trova il file.</span><span class="app-arr">↗</span></a>
+</div>
+
+<div class="row row-footer">
+  <span class="label">Salvami in home / dock</span>
+  <span class="val">↑</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Y — Aggiornamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#fff;color:#111;overflow-x:hidden;min-height:100vh}
+body{padding-bottom:54px}
+
+/* TOPBAR */
+.bar{padding:12px 18px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.bar-brand{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#ccc}
+.wa{background:none;color:#111;font-size:9px;font-weight:800;letter-spacing:.14em;border:1px solid #ddd;padding:4px 10px;cursor:pointer;font-family:inherit}
+
+/* HERO — schermata aggiornamento */
+.hero{padding:40px 20px 32px;text-align:center;border-bottom:1px solid #f0f0f0}
+.app-icon{width:80px;height:80px;background:#111;border-radius:20px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.update-badge{display:inline-flex;align-items:center;gap:5px;background:#f0f0f0;color:#555;font-size:9px;font-weight:800;letter-spacing:.16em;padding:4px 10px;border-radius:20px;text-transform:uppercase;margin-bottom:14px}
+.update-badge::before{content:'';width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(32px,11vw,50px);font-weight:800;line-height:.88;letter-spacing:-.05em;text-transform:uppercase;margin-bottom:10px}
+.version-row{font-size:10px;color:#aaa;letter-spacing:.06em;margin-bottom:6px}
+.version-row span{color:#111;font-weight:700}
+
+/* progress update */
+.update-progress{margin:18px auto 0;max-width:280px}
+.prog-track{height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden;margin-bottom:6px}
+.prog-fill{height:100%;background:#111;border-radius:3px;width:73%;position:relative;overflow:hidden}
+.prog-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shimmer 1.5s infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)} }
+.prog-meta{display:flex;justify-content:space-between;font-size:9px;color:#aaa;font-weight:700;letter-spacing:.06em}
+
+/* NOTE AGGIORNAMENTO */
+.release-notes{padding:20px 20px;border-bottom:1px solid #f0f0f0}
+.rn-title{font-size:9px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#aaa;margin-bottom:12px}
+.rn-item{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.rn-dot{width:6px;height:6px;background:#111;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rn-text{font-size:11px;color:#333;line-height:1.55}
+.rn-text b{color:#111;font-weight:800}
+
+/* CARD — app in primo piano */
+.roulette{padding:18px 20px;border-bottom:1px solid #f0f0f0;display:flex;gap:14px;align-items:flex-start}
+.card-icon-sm{width:48px;height:48px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.card-right{}
+.card-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#ccc;margin-bottom:3px}
+.card-title{font-size:clamp(18px,6vw,26px);font-weight:800;line-height:.9;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-desc{font-size:10px;color:#888;margin-top:4px;line-height:1.5}
+.update-btn{display:block;width:100%;margin-top:16px;padding:14px;background:#111;color:#fff;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer}
+.skip-link{display:block;text-align:center;margin-top:8px;font-size:10px;color:#aaa;cursor:pointer;letter-spacing:.06em}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #f0f0f0;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#ccc}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <span class="bar-brand">© Useless Studio</span>
+  <button class="wa">WA</button>
+</nav>
+
+<section class="hero">
+  <div class="app-icon">🎲</div>
+  <div class="update-badge">Aggiornamento disponibile</div>
+  <h1>Gioca<br>con<br>me.</h1>
+  <div class="version-row">v1.0 → <span>v2.0 — Algoritmo senza scrupoli</span></div>
+  <div class="update-progress">
+    <div class="prog-track"><div class="prog-fill"></div></div>
+    <div class="prog-meta"><span>Download in corso…</span><span>73%</span></div>
+  </div>
+</section>
+
+<div class="release-notes">
+  <div class="rn-title">Novità in questa versione</div>
+  <div class="rn-item"><span class="rn-dot"></span><div class="rn-text"><b>Algoritmo migliorato</b> — ora ha ancora meno scrupoli di prima.</div></div>
+  <div class="rn-item"><span class="rn-dot"></span><div class="rn-text"><b>Scelta rimossa</b> — non puoi più decidere da solo. Per il tuo bene.</div></div>
+  <div class="rn-item"><span class="rn-dot"></span><div class="rn-text"><b>6 app inutili</b> — tutte necessarie. Nessuna spiegazione fornita.</div></div>
+  <div class="rn-item"><span class="rn-dot"></span><div class="rn-text"><b>Bug fix</b> — rimosso il bug che ti faceva pensare di sapere cosa vuoi.</div></div>
+</div>
+
+<section class="roulette">
+  <div class="card-icon-sm">🕊️</div>
+  <div class="card-right">
+    <div class="card-label">Aggiornata ora</div>
+    <div class="card-title">Piccione<br>Viaggiatore</div>
+    <div class="card-desc">Sistema di messaggistica lenta. Ora ancora più lenta.</div>
+  </div>
+</section>
+
+<div style="padding:18px 20px">
+  <button class="update-btn">Aggiorna e gioca →</button>
+  <span class="skip-link">Ricordamelo più tardi</span>
+</div>
+
+<div class="install"><span>Salvami in home / dock</span><span>↑</span></div>
+</body></html>

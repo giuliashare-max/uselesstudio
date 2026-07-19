@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DD — Forza Chiusura</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#e0e0e0;color:#111;min-height:100vh;overflow-x:hidden}
+body{display:flex;flex-direction:column;align-items:center;padding:24px 14px 80px;background:repeating-linear-gradient(45deg,#d8d8d8,#d8d8d8 1px,#e0e0e0 1px,#e0e0e0 10px)}
+
+/* Finestra macOS — stile Aqua minimalizzato */
+.window{width:100%;max-width:400px;background:#f5f5f5;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.35),0 4px 12px rgba(0,0,0,.2),0 0 0 .5px rgba(0,0,0,.15);overflow:hidden}
+
+/* titlebar */
+.titlebar{background:linear-gradient(180deg,#e8e8e8 0%,#d8d8d8 100%);padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #c0c0c0}
+.tb-dots{display:flex;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57;box-shadow:0 0 0 .5px rgba(0,0,0,.2)}
+.dot.y{background:#febc2e;box-shadow:0 0 0 .5px rgba(0,0,0,.2)}
+.dot.g{background:#28c840;box-shadow:0 0 0 .5px rgba(0,0,0,.2)}
+.tb-title{flex:1;text-align:center;font-size:12px;font-weight:700;color:#444;letter-spacing:.02em;margin-right:36px}
+
+/* body */
+.win-body{padding:18px 18px 16px}
+.win-desc{font-size:12px;color:#555;line-height:1.65;margin-bottom:16px}
+.win-desc b{color:#111;font-weight:700}
+
+/* lista processi */
+.proc-list{background:#fff;border:1px solid #d0d0d0;border-radius:6px;overflow:hidden;margin-bottom:16px}
+.proc-header{display:grid;grid-template-columns:1fr auto;padding:7px 12px;background:#f0f0f0;border-bottom:1px solid #d8d8d8;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#888}
+.proc-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:10px 12px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.proc-row:last-child{border-bottom:none}
+.proc-row.selected{background:#dbeafe}
+.proc-row.highlight{background:#fef2f2}
+.proc-left{display:flex;align-items:center;gap:9px}
+.proc-icon{width:20px;height:20px;border-radius:5px;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.proc-name{font-size:12px;font-weight:700;color:#111}
+.proc-name.nr{color:#cc2200}
+.proc-status{font-size:10px;margin-top:1px}
+.proc-status.ok{color:#888}
+.proc-status.notresp{color:#cc2200;font-weight:700}
+.proc-mem{font-size:10px;color:#888;font-weight:500}
+
+/* HERO — titolo sopra la finestra */
+.hero{text-align:center;margin-bottom:20px}
+h1{font-size:clamp(44px,16vw,68px);font-weight:800;line-height:.84;letter-spacing:-.05em;text-transform:uppercase;color:#111}
+.hero-sub{font-size:11px;color:#888;line-height:1.6;margin-top:8px}
+
+/* bottoni finestra */
+.win-btns{display:flex;gap:8px;justify-content:flex-end}
+.wbtn{padding:8px 18px;font-family:inherit;font-size:12px;font-weight:700;border-radius:6px;cursor:pointer;border:1px solid transparent;letter-spacing:.02em}
+.wbtn.cancel{background:linear-gradient(180deg,#fff 0%,#e8e8e8 100%);color:#111;border-color:#c0c0c0;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.wbtn.force{background:linear-gradient(180deg,#3b82f6 0%,#2563eb 100%);color:#fff;border-color:#1d4ed8;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.wbtn.force:disabled{background:#e0e0e0;color:#aaa;border-color:#d0d0d0;box-shadow:none}
+
+/* info sotto */
+.win-footer-note{text-align:center;margin-top:14px;font-size:10px;color:#888;line-height:1.6}
+
+/* dock in fondo */
+.dock{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.7);backdrop-filter:blur(20px);border-radius:16px;padding:8px 16px;display:flex;gap:12px;border:1px solid rgba(255,255,255,.8);box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.dock-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer}
+.dock-icon:hover{transform:scale(1.15) translateY(-4px);transition:transform .15s}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Gioca<br>con<br>me.</h1>
+  <p class="hero-sub">Alcune app non rispondono.<br>Forza la chiusura e ricomincia.</p>
+</div>
+
+<div class="window">
+  <div class="titlebar">
+    <div class="tb-dots">
+      <div class="dot r"></div>
+      <div class="dot y"></div>
+      <div class="dot g"></div>
+    </div>
+    <div class="tb-title">Forza chiusura applicazioni</div>
+  </div>
+  <div class="win-body">
+    <p class="win-desc">Se un'app non risponde, selezionala e clicca <b>Forza chiusura</b>.<br><b>Scelta_Utente</b> non risponde da sempre.</p>
+
+    <div class="proc-list">
+      <div class="proc-header"><span>Applicazione</span><span>Memoria</span></div>
+      <div class="proc-row">
+        <div class="proc-left">
+          <div class="proc-icon">🕊️</div>
+          <div>
+            <div class="proc-name">Piccione_Viaggiatore</div>
+            <div class="proc-status ok">In esecuzione</div>
+          </div>
+        </div>
+        <div class="proc-mem">4 MB</div>
+      </div>
+      <div class="proc-row highlight selected">
+        <div class="proc-left">
+          <div class="proc-icon">🤔</div>
+          <div>
+            <div class="proc-name nr">Scelta_Utente</div>
+            <div class="proc-status notresp">Non risponde</div>
+          </div>
+        </div>
+        <div class="proc-mem">∞</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-left">
+          <div class="proc-icon">📄</div>
+          <div>
+            <div class="proc-name">Licenziati</div>
+            <div class="proc-status ok">In esecuzione</div>
+          </div>
+        </div>
+        <div class="proc-mem">2 MB</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-left">
+          <div class="proc-icon">🤫</div>
+          <div>
+            <div class="proc-name">Niente</div>
+            <div class="proc-status ok">In esecuzione (non fa niente)</div>
+          </div>
+        </div>
+        <div class="proc-mem">0 MB</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-left">
+          <div class="proc-icon">🎲</div>
+          <div>
+            <div class="proc-name">Algoritmo_Roulette</div>
+            <div class="proc-status ok">In esecuzione</div>
+          </div>
+        </div>
+        <div class="proc-mem">42 MB</div>
+      </div>
+    </div>
+
+    <div class="win-btns">
+      <button class="wbtn cancel">Annulla</button>
+      <button class="wbtn force">Forza chiusura</button>
+    </div>
+  </div>
+</div>
+
+<div class="win-footer-note">
+  © Useless Studio — Micro-app inutili. Necessarie.<br>
+  <span style="font-size:9px;color:#aaa;letter-spacing:.1em;text-transform:uppercase">Aggiungi al dock ↓</span>
+</div>
+
+<div class="dock">
+  <div class="dock-icon">🎲</div>
+  <div class="dock-icon">🕊️</div>
+  <div class="dock-icon">📄</div>
+  <div class="dock-icon">🤫</div>
+  <div class="dock-icon">📚</div>
+</div>
+
+</body>
+</html>

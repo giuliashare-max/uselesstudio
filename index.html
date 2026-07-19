@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Useless Studio</title>
+  <meta property="og:title" content="Useless Studio" />
+  <meta property="og:description" content="Micro-app inutili ma necessarie" />
+  <meta property="og:image" content="icons/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="icons/og-image.png" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Useless Studio" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap">
+  <script>document.write('<link rel="stylesheet" href="style.css?v='+Date.now()+'">')</script>
+</head>
+<body>
+
+  <!-- SPLASH RANDOM: deve partire subito, prima di tutto il resto -->
+  <script src="splash-loader.js?v=2"></script>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <span class="topbar-brand">
+      <img src="icons/logo.png" alt="Useless Studio" class="topbar-logo">
+      © USELESS STUDIO
+    </span>
+    <a class="wa-btn" id="waShare" href="#" target="_blank" rel="noopener">WA</a>
+  </nav>
+  <script>
+    document.getElementById('waShare').href =
+      'https://wa.me/?text=' + encodeURIComponent('Useless Studio — micro-app inutili ma necessarie → https://uselesstudio.com/');
+  </script>
+
+  <!-- HERO — centrato -->
+  <main class="hero">
+    <p class="card-eyebrow" style="margin-bottom:16px">Micro-app inutili. Necessarie.</p>
+    <h1>GIOCA<br>CON<br>ME.</h1>
+
+    <div class="sep"></div>
+
+    <p class="card-eyebrow">In rotazione ora</p>
+
+    <div class="game-card" id="gameCard">
+      <h2 id="gameTitle">?</h2>
+      <p id="gameDesc">Non decidere tu. Fai scegliere a un algoritmo senza scrupoli.</p>
+      <p class="status" id="ticker">↑ premi gira</p>
+    </div>
+
+    <button id="spinBtn">GIRA →</button>
+
+    <details class="archive" id="archiveDetails">
+      <summary>Scegline un altro</summary>
+      <div class="grid" id="grid"></div>
+    </details>
+  </main>
+  <script>
+    document.getElementById('archiveDetails').addEventListener('toggle', function () {
+      if (this.open && window.innerWidth <= 768) {
+        setTimeout(function () {
+          document.getElementById('archiveDetails').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+    });
+  </script>
+
+  <!-- INSTALL BAR -->
+  <div class="install-bar" id="installBar">
+    <button class="install-toggle" id="installToggle">
+      <span class="install-toggle-label">Trasformami in un'app — salvami in home / desktop / dock</span>
+      <span class="install-arrow">↑</span>
+    </button>
+    <div class="install-panel" id="installPanel">
+      <div class="install-panel-inner">
+        <div class="install-platform">
+          <span class="install-platform-label">iPhone / iPad</span>
+          <span class="install-platform-text">Tocca <b>Condividi</b>, poi scegli <b>Aggiungi alla schermata Home</b>.</span>
+        </div>
+        <div class="install-platform">
+          <span class="install-platform-label">Android</span>
+          <span class="install-platform-text">Apri il menu <b>⋮</b> in alto a destra, poi scegli <b>Aggiungi a schermata Home</b>.</span>
+        </div>
+        <div class="install-platform">
+          <span class="install-platform-label">Chrome / Edge (desktop)</span>
+          <span class="install-platform-text">Clicca l'icona <b>⊕</b> nella barra degli indirizzi oppure menu <b>⋮ → Installa Useless Studio</b>.</span>
+        </div>
+        <div class="install-platform">
+          <span class="install-platform-label">Safari (Mac)</span>
+          <span class="install-platform-text">Clicca <b>Condividi</b> nella barra degli indirizzi, poi scegli <b>Aggiungi al Dock</b>.</span>
+        </div>
+      </div>
+    </div>
+    <footer class="install-footer">
+      <span>© USELESS STUDIO</span>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      var bar = document.getElementById('installBar');
+      if (isStandalone) { bar.hidden = true; return; }
+      document.getElementById('installToggle').addEventListener('click', function () {
+        bar.classList.toggle('open');
+      });
+    })();
+  </script>
+
+  <script>document.write('<script src="script.js?v='+Date.now()+'"><\/script>')</script>
+</body>
+</html>

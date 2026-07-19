@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FF — Screensaver</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#000;color:#fff;min-height:100vh;overflow:hidden;height:100vh}
+
+/* SCREENSAVER — testo che rimbalza */
+.screen{position:relative;width:100%;height:100vh;overflow:hidden;cursor:pointer}
+
+/* blocco rimbalzante */
+.bouncer{
+  position:absolute;
+  white-space:nowrap;
+  /* animazione: rimbalza tra gli angoli */
+  animation: moveX 7s linear infinite alternate, moveY 5.3s linear infinite alternate;
+}
+@keyframes moveX{
+  from{left:0} to{left:calc(100% - 280px)}
+}
+@keyframes moveY{
+  from{top:20px} to{top:calc(100% - 120px)}
+}
+
+.bouncer h1{
+  font-size:clamp(28px,10vw,42px);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.04em;
+  text-transform:uppercase;
+  /* colore che cambia — cycling */
+  animation:colorshift 14s linear infinite;
+}
+@keyframes colorshift{
+  0%   {color:#ff2d55}
+  16%  {color:#ff9f0a}
+  33%  {color:#30d158}
+  50%  {color:#0a84ff}
+  66%  {color:#bf5af2}
+  83%  {color:#64d2ff}
+  100% {color:#ff2d55}
+}
+.bouncer .sub{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.5;
+  color:#fff;
+  margin-top:4px;
+}
+
+/* OVERLAY al tocco — nascosto di default */
+.overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  opacity:0;
+  transition:opacity .3s;
+  pointer-events:none;
+  padding:20px;
+  text-align:center;
+}
+.screen:active .overlay,.overlay.show{opacity:1;pointer-events:all}
+
+.overlay-eyebrow{font-size:9px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px}
+.overlay-title{font-size:clamp(32px,12vw,52px);font-weight:800;line-height:.86;letter-spacing:-.05em;text-transform:uppercase;margin-bottom:12px}
+.overlay-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:28px;max-width:260px}
+.play-btn{padding:14px 36px;background:#fff;color:#000;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;border-radius:4px}
+.spin-btn{margin-top:10px;padding:10px 24px;background:transparent;color:rgba(255,255,255,.4);font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);cursor:pointer;border-radius:4px}
+
+/* app grid nel overlay */
+.overlay-apps{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.oa{width:52px;height:52px;background:rgba(255,255,255,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;border:1px solid rgba(255,255,255,.06)}
+
+/* hint "tocca" */
+.touch-hint{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  white-space:nowrap;
+  animation:fade 3s ease-in-out infinite;
+}
+@keyframes fade{0%,100%{opacity:.2}50%{opacity:.6}}
+
+/* brand angolo */
+.brand{position:absolute;top:14px;right:16px;font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.15)}
+</style>
+</head>
+<body>
+
+<div class="screen" id="screen">
+  <div class="bouncer">
+    <h1>Gioca<br>con<br>me.</h1>
+    <div class="sub">© Useless Studio</div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-eyebrow">Tocco rilevato — In rotazione</div>
+    <div class="overlay-title">Piccione<br>Viaggiatore</div>
+    <div class="overlay-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</div>
+    <button class="play-btn">Gioca →</button>
+    <button class="spin-btn" onclick="event.stopPropagation()">Riestrai</button>
+    <div class="overlay-apps">
+      <div class="oa">📄</div>
+      <div class="oa">🤫</div>
+      <div class="oa">📚</div>
+      <div class="oa">🔍</div>
+    </div>
+  </div>
+
+  <div class="touch-hint">Tocca per giocare</div>
+  <div class="brand">Micro-app inutili. Necessarie.</div>
+</div>
+
+<script>
+const screen = document.getElementById('screen');
+const overlay = document.getElementById('overlay');
+let shown = false;
+screen.addEventListener('click', () => {
+  shown = !shown;
+  overlay.classList.toggle('show', shown);
+});
+</script>
+</body>
+</html>

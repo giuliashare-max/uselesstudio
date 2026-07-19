@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q — Ricettario</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#2a1f0e;--bg:#fdf6ec;--paper:#fff9f0;--rust:#c0441a;--cream:#e8d5b0;--muted:#8a6a4a;--line:#d9c9a8}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;min-height:100vh}
+body{padding-bottom:52px}
+
+/* TOPBAR — copertina libro */
+.bar{background:var(--rust);color:#fff;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--ink)}
+.bar-left{display:flex;align-items:center;gap:8px}
+.logo{width:26px;height:26px;background:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.logo span{font-size:14px}
+.bar-brand{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;display:block;opacity:.95}
+.bar-sub{font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.65;display:block}
+.wa{background:#fff;color:var(--rust);font-size:9px;font-weight:800;letter-spacing:.1em;padding:4px 9px;border:none;cursor:pointer;font-family:inherit}
+
+/* HERO — stile titolo ricettario */
+.hero{padding:22px 18px 16px;border-bottom:2px solid var(--line);background:var(--paper);position:relative}
+.hero-chapter{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.hero-ornament{color:var(--rust);font-size:18px;letter-spacing:.2em;margin-bottom:8px;display:block}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(44px,16vw,68px);font-weight:900;line-height:.84;letter-spacing:-.03em;text-transform:none;color:var(--ink)}
+h1 em{font-style:italic;color:var(--rust)}
+.hero-sub{font-size:10.5px;color:var(--muted);line-height:1.7;margin-top:10px}
+.hero-hr{border:none;border-top:1px solid var(--line);margin-top:12px}
+.hero-meta{display:flex;gap:14px;margin-top:8px}
+.meta-item{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.meta-item span{display:block;font-size:10px;font-weight:700;color:var(--ink);letter-spacing:0;text-transform:none;margin-top:1px}
+
+/* CARD — come una ricetta */
+.roulette{padding:16px 18px 14px;border-bottom:2px solid var(--line);background:var(--bg)}
+.recipe-tag{display:inline-flex;align-items:center;gap:5px;background:var(--rust);color:#fff;font-size:8px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:3px 10px;margin-bottom:10px}
+.card-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,9vw,38px);font-weight:700;font-style:italic;line-height:.9;word-break:break-word;color:var(--ink)}
+.ingredients{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.ing-label{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ing-item{font-size:10px;color:var(--ink);line-height:1.7;display:flex;align-items:center;gap:6px}
+.ing-item::before{content:'—';color:var(--rust);font-size:12px}
+.spin-btn{display:block;width:100%;margin-top:12px;padding:12px;background:var(--rust);color:#fff;font-family:'Playfair Display',Georgia,serif;font-size:14px;font-weight:700;font-style:italic;letter-spacing:.04em;border:none;cursor:pointer}
+
+/* ARCHIVE */
+.archive-row{background:var(--paper);padding:12px 18px;border-bottom:2px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* GRID — indice ricette */
+.grid{display:grid;grid-template-columns:1fr 1fr;background:var(--paper)}
+.cell{padding:12px 12px;border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.cell:nth-child(2n){border-right:none}
+.cell-icon{font-size:18px;margin-bottom:2px}
+.cell-num{font-size:8px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.cell h3{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:700;font-style:italic;line-height:1.15}
+.cell p{font-size:9px;color:var(--muted);line-height:1.3}
+.cell:nth-child(1){background:var(--rust);color:#fff}
+.cell:nth-child(1) .cell-num,.cell:nth-child(1) p{color:rgba(255,255,255,.65)}
+.cell:nth-child(1) h3{color:#fff}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--rust);color:#fff;border-top:2px solid var(--ink);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-left">
+    <div class="logo"><span>📖</span></div>
+    <div>
+      <span class="bar-brand">© Useless Studio</span>
+      <span class="bar-sub">Micro-app inutili. Necessarie.</span>
+    </div>
+  </div>
+  <button class="wa">WA</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-chapter">Capitolo I · Roulette delle app</div>
+  <span class="hero-ornament">✦ ✦ ✦</span>
+  <h1>Gioca<br>con<br><em>me.</em></h1>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+  <hr class="hero-hr">
+  <div class="hero-meta">
+    <div class="meta-item">Porzioni<span>∞</span></div>
+    <div class="meta-item">Scrupoli<span>0 g</span></div>
+    <div class="meta-item">Difficoltà<span>Nessuna</span></div>
+  </div>
+</section>
+
+<section class="roulette">
+  <span class="recipe-tag">📋 In rotazione ora</span>
+  <div class="card-title">Piccione<br>Viaggiatore</div>
+  <div class="ingredients">
+    <div class="ing-label">Ingredienti</div>
+    <div class="ing-item">Messaggistica lenta, q.b.</div>
+    <div class="ing-item">Pazienza, tanta</div>
+    <div class="ing-item">Piccione, 1</div>
+  </div>
+  <button class="spin-btn">Cambia ricetta →</button>
+</section>
+
+<div class="archive-row"><span>Indice delle ricette</span><span>+</span></div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-icon">📄</span><span class="cell-num">Ric. I</span><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-icon">🤫</span><span class="cell-num">Ric. II</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-icon">📚</span><span class="cell-num">Ric. III</span><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+  <a class="cell" href="#"><span class="cell-icon">🔍</span><span class="cell-num">Ric. IV</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install"><span>Salvami in home / dock</span><span>↑</span></div>
+</body></html>

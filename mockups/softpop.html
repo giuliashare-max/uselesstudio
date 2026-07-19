@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E — Soft Pop</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1025;
+  --bg:#fef3eb;
+  --peach:#ffb89a;
+  --violet:#7c5cbf;
+  --mint:#a8e6cf;
+  --yellow:#ffe066;
+  --paper:#fff8f2;
+  --muted:#9e8a7a;
+}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+body{padding-bottom:52px}
+
+/* TOPBAR */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.bar-left{display:flex;align-items:center;gap:9px}
+.logo{width:28px;height:28px;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo span{font-size:13px;font-weight:800;color:#fff}
+.bar-brand{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.bar-sub{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block}
+.wa{background:#25D366;color:var(--ink);font-size:9px;font-weight:800;letter-spacing:.1em;padding:5px 10px;border-radius:6px;border:1.5px solid var(--ink)}
+
+/* HERO */
+.hero{padding:24px 18px 18px;border-bottom:1.5px solid var(--ink);position:relative;background:var(--bg);overflow:hidden}
+/* cerchio decorativo */
+.hero::before{content:'';position:absolute;right:-30px;top:-30px;width:140px;height:140px;background:var(--peach);border-radius:50%;z-index:0;opacity:.5}
+.hero-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;position:relative;z-index:1}
+h1{font-size:clamp(46px,16vw,72px);font-weight:800;line-height:.84;letter-spacing:-.05em;text-transform:uppercase;position:relative;z-index:1}
+h1 .acc{color:var(--violet)}
+.hero-sub{font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:10px;position:relative;z-index:1;max-width:260px}
+
+/* CARD */
+.roulette{padding:16px 18px 14px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.card-tag{display:inline-block;background:var(--yellow);color:var(--ink);font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:3px 8px;border-radius:20px;border:1.5px solid var(--ink);margin-bottom:8px}
+.card-title{font-size:clamp(26px,9vw,42px);font-weight:800;line-height:.86;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45}
+.card-cta{font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.spin-btn{display:block;width:100%;margin-top:13px;padding:13px;background:var(--violet);color:#fff;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:8px;cursor:pointer}
+
+/* ARCHIVE */
+.archive-row{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1.5px solid var(--ink);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.archive-row span:last-child{font-size:20px;color:var(--ink);font-weight:400}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:13px 12px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px;background:var(--paper)}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-size:8px;font-weight:700;letter-spacing:.14em;color:#1a102544}
+.cell h3{font-size:12px;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.1}
+.cell p{font-size:9px;color:var(--muted);line-height:1.3}
+.cell:nth-child(1){background:var(--peach)}
+.cell:nth-child(2){background:var(--mint)}
+.cell:nth-child(3){background:var(--yellow)}
+.cell:nth-child(4){background:var(--paper)}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--violet);color:#fff;padding:9px 18px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-top:1.5px solid var(--ink)}
+</style>
+</head>
+<body>
+<nav class="bar">
+  <div class="bar-left">
+    <div class="logo"><span>U</span></div>
+    <div>
+      <span class="bar-brand">© Useless Studio</span>
+      <span class="bar-sub">Micro-app inutili. Necessarie.</span>
+    </div>
+  </div>
+  <span class="wa">WA</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">Roulette delle app</div>
+  <h1>Gioca<br>con<br><span class="acc">me.</span></h1>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+</section>
+
+<section class="roulette">
+  <span class="card-tag">↻ In rotazione</span>
+  <div class="card-title">Piccione<br>Viaggiatore</div>
+  <div class="card-desc">Sistema di messaggistica lenta.</div>
+  <div class="card-cta">Tocca la card per giocare</div>
+  <button class="spin-btn">Gira →</button>
+</section>
+
+<div class="archive-row"><span>Scegline un altro</span><span>+</span></div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">01</span><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-num">02</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">03</span><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+  <a class="cell" href="#"><span class="cell-num">04</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install">
+  <span>Salvami in home / dock</span>
+  <span>↑</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U — Dialog di Sistema</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#e8e8e8;color:#111;overflow-x:hidden;min-height:100vh}
+body{padding-bottom:0;display:flex;flex-direction:column;gap:0}
+
+/* sfondo desktop grigio */
+body{background:#c8c8c8;background-image:radial-gradient(circle,#d4d4d4 1px,transparent 1px);background-size:20px 20px}
+
+/* finestra OS generica */
+.window{
+  background:#f0f0f0;
+  border:1px solid #888;
+  box-shadow:2px 2px 0 #fff inset,-1px -1px 0 #666 inset,3px 3px 8px rgba(0,0,0,.3);
+  margin:14px;
+  border-radius:0;
+}
+.titlebar{
+  background:linear-gradient(180deg,#111 0%,#333 100%);
+  color:#fff;
+  padding:5px 8px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:11px;font-weight:700;letter-spacing:.04em;
+  user-select:none;
+}
+.titlebar-left{display:flex;align-items:center;gap:5px}
+.title-icon{font-size:12px}
+.titlebar-btns{display:flex;gap:3px}
+.tbtn{
+  width:12px;height:12px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.3);
+  display:inline-block;cursor:pointer;
+}
+.tbtn.r{background:#ff5f57}.tbtn.y{background:#ffbd2e}.tbtn.g{background:#28c840}
+.win-body{padding:14px 16px 14px}
+
+/* DIALOG PRINCIPALE — il "sito" */
+.main-dialog{margin:0 14px}
+.dialog-icon-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.dialog-icon{font-size:40px;flex-shrink:0;line-height:1}
+.dialog-text h1{font-size:clamp(22px,8vw,34px);font-weight:800;line-height:.9;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:6px}
+.dialog-text p{font-size:10.5px;color:#444;line-height:1.6}
+.dialog-btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.btn{
+  padding:6px 20px;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.04em;
+  border-radius:2px;cursor:pointer;
+  border:1px solid #888;
+  box-shadow:1px 1px 0 #fff inset,-1px -1px 0 #aaa inset;
+}
+.btn.primary{background:#111;color:#fff;border-color:#111;box-shadow:1px 1px 0 rgba(255,255,255,.2) inset}
+.btn.secondary{background:#f0f0f0;color:#111}
+.btn.default-focus{outline:2px solid #111;outline-offset:2px}
+
+/* finestra card */
+.card-window{margin:0 14px}
+.card-win-body{padding:12px 14px}
+.card-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-bottom:8px}
+.card-title{font-size:clamp(20px,7vw,30px);font-weight:800;line-height:.9;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-desc{font-size:10px;color:#555;margin-top:5px;line-height:1.5}
+.card-btns{display:flex;gap:6px;margin-top:12px}
+.spin-btn{padding:8px 18px;background:#111;color:#fff;font-family:inherit;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:1px solid #111;cursor:pointer;box-shadow:1px 1px 0 rgba(255,255,255,.2) inset}
+.skip-btn{padding:8px 14px;background:#f0f0f0;color:#111;font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.06em;border:1px solid #aaa;cursor:pointer;box-shadow:1px 1px 0 #fff inset,-1px -1px 0 #ccc inset}
+
+/* finestra archivio */
+.archive-window{margin:0 14px}
+.list-body{padding:8px 14px}
+.list-item{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #ddd;font-size:10.5px;font-weight:700;cursor:pointer}
+.list-item:last-child{border-bottom:none}
+.list-item:hover{background:#e8e8ff}
+.list-left{display:flex;align-items:center;gap:8px}
+.list-icon{font-size:14px}
+.list-num{font-size:8px;font-weight:800;letter-spacing:.14em;color:#aaa;min-width:20px}
+.list-arrow{font-size:12px;color:#888}
+
+/* INSTALL — barra taskbar */
+.taskbar{
+  position:fixed;bottom:0;left:0;right:0;
+  background:linear-gradient(180deg,#d4d4d4 0%,#b8b8b8 100%);
+  border-top:2px solid #fff;
+  padding:6px 10px;
+  display:flex;align-items:center;gap:6px;
+}
+.taskbar-btn{
+  padding:4px 10px;
+  background:linear-gradient(180deg,#f0f0f0 0%,#d8d8d8 100%);
+  font-family:inherit;font-size:9px;font-weight:800;letter-spacing:.06em;
+  border:1px solid #888;border-radius:2px;cursor:pointer;
+  box-shadow:1px 1px 0 #fff inset,-1px -1px 0 #aaa inset;
+  text-transform:uppercase;
+}
+.taskbar-btn.active{background:linear-gradient(180deg,#d8d8d8 0%,#f0f0f0 100%);box-shadow:-1px -1px 0 #fff inset,1px 1px 0 #aaa inset}
+.taskbar-clock{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.08em;color:#333;border:1px solid #aaa;padding:3px 8px;background:#f0f0f0;box-shadow:1px 1px 0 #fff inset}
+</style>
+</head>
+<body>
+
+<!-- finestra principale: il titolo del sito -->
+<div class="window" style="margin-top:18px">
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <span class="title-icon">🎲</span>
+      <span>Useless Studio — Roulette.app</span>
+    </div>
+    <div class="titlebar-btns">
+      <span class="tbtn r"></span><span class="tbtn y"></span><span class="tbtn g"></span>
+    </div>
+  </div>
+  <div class="win-body">
+    <div class="main-dialog">
+      <div class="dialog-icon-row">
+        <span class="dialog-icon">❓</span>
+        <div class="dialog-text">
+          <h1>Gioca<br>con me.</h1>
+          <p>Non scegliere. Vuoi davvero decidere da solo?<br>Lascia fare all'algoritmo. Zero scrupoli.</p>
+        </div>
+      </div>
+      <div class="dialog-btns">
+        <button class="btn secondary">Annulla</button>
+        <button class="btn primary default-focus">Gira →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- finestra card: app estratta -->
+<div class="window card-window">
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <span class="title-icon">🕊️</span>
+      <span>In rotazione ora</span>
+    </div>
+    <div class="titlebar-btns">
+      <span class="tbtn r"></span><span class="tbtn y"></span><span class="tbtn g"></span>
+    </div>
+  </div>
+  <div class="card-win-body">
+    <div class="card-label">App estratta dall'algoritmo</div>
+    <div class="card-title">Piccione<br>Viaggiatore</div>
+    <div class="card-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</div>
+    <div class="card-btns">
+      <button class="spin-btn">Gioca</button>
+      <button class="skip-btn">Riestrai</button>
+    </div>
+  </div>
+</div>
+
+<!-- finestra lista: le altre app -->
+<div class="window archive-window">
+  <div class="titlebar">
+    <div class="titlebar-left">
+      <span class="title-icon">📂</span>
+      <span>Tutte le app — 6 elementi</span>
+    </div>
+    <div class="titlebar-btns">
+      <span class="tbtn r"></span><span class="tbtn y"></span><span class="tbtn g"></span>
+    </div>
+  </div>
+  <div class="list-body">
+    <div class="list-item"><div class="list-left"><span class="list-icon">📄</span><span class="list-num">01</span><span>Licenziati</span></div><span class="list-arrow">›</span></div>
+    <div class="list-item"><div class="list-left"><span class="list-icon">🤫</span><span class="list-num">02</span><span>Niente</span></div><span class="list-arrow">›</span></div>
+    <div class="list-item"><div class="list-left"><span class="list-icon">📚</span><span class="list-num">03</span><span>Cose Inutili</span></div><span class="list-arrow">›</span></div>
+    <div class="list-item"><div class="list-left"><span class="list-icon">🔍</span><span class="list-num">04</span><span>Font Detective</span></div><span class="list-arrow">›</span></div>
+  </div>
+</div>
+
+<!-- taskbar fissa -->
+<div class="taskbar">
+  <button class="taskbar-btn">🎲 Roulette</button>
+  <button class="taskbar-btn active">🕊️ Piccione</button>
+  <button class="taskbar-btn">📂 Archivio</button>
+  <span class="taskbar-clock">Aggiungi ↑</span>
+</div>
+
+</body>
+</html>

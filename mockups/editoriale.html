@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variante — Editoriale Europeo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1c1c1a;--bg:#e8e2d5;--paper:#f5f0e8;--accent:#c8a82c;--muted:#8a8278}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+/* TOPBAR — linea fine, testo minuscolo */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--ink)}
+.bar-left{display:flex;align-items:center;gap:10px}
+.logo-img{width:26px;height:26px;opacity:.85}
+.bar-label{font-size:9px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.wa{font-size:9px;font-weight:700;letter-spacing:.1em;padding:4px 9px;border:1px solid var(--ink);background:#25D366;color:var(--ink)}
+
+/* HERO — asimmetrico: numero colonna a sinistra, titolo a destra */
+.hero{display:grid;grid-template-columns:32px 1fr;border-bottom:1px solid var(--ink);min-height:160px}
+.hero-num{writing-mode:vertical-rl;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:16px 8px;border-right:1px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.hero-body{padding:18px 16px 14px;display:flex;flex-direction:column;justify-content:space-between}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,16vw,72px);font-weight:400;line-height:.86;letter-spacing:-.02em;text-transform:none}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px;font-weight:300;max-width:240px}
+
+/* CARD — stile rivista, titolo piccolo */
+.roulette{display:grid;grid-template-columns:32px 1fr;border-bottom:1px solid var(--ink)}
+.r-side{writing-mode:vertical-rl;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:14px 8px;border-right:1px solid var(--ink);display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff}
+.r-body{padding:14px 16px;background:var(--paper)}
+.r-eyebrow{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.card-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,9vw,44px);font-weight:400;line-height:.88;word-break:break-word}
+.card-desc{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5;font-weight:300}
+.card-cta{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#1c1c1a44;margin-top:4px}
+.spin-btn{display:block;width:100%;margin-top:12px;padding:11px;background:var(--ink);color:var(--bg);font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer}
+
+/* ARCHIVE — riga sottile */
+.archive-row{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--ink);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* GRID — 2 col, righe di giornale */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:12px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);text-decoration:none;color:var(--ink)}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-size:8px;letter-spacing:.14em;color:#1c1c1a33;display:block;margin-bottom:3px}
+.cell h3{font-family:'DM Serif Display',serif;font-size:15px;font-weight:400;line-height:1.1}
+.cell p{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.4;font-weight:300}
+.cell:nth-child(1){background:var(--accent)}
+.cell:nth-child(1) .cell-num,.cell:nth-child(1) p{color:#fff8}
+.cell:nth-child(1) h3{color:#fff}
+
+/* INSTALL BAR */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--paper);border-top:1px solid var(--ink);padding:7px 16px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+body{padding-bottom:46px}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-left">
+    <img class="logo-img" src="../icons/favicon-32.png" alt="U">
+    <span class="bar-label">© Useless Studio — micro-app inutili. necessarie.</span>
+  </div>
+  <span class="wa">WA</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-num">Roulette</div>
+  <div class="hero-body">
+    <h1>Gioca<br>con<br><em>me.</em></h1>
+    <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+  </div>
+</section>
+
+<section class="roulette">
+  <div class="r-side">Now</div>
+  <div class="r-body">
+    <div class="r-eyebrow">In rotazione</div>
+    <div class="card-title">Piccione<br>Viaggiatore</div>
+    <div class="card-desc">Sistema di messaggistica lenta.</div>
+    <div class="card-cta">Tocca per giocare</div>
+    <button class="spin-btn">Gira →</button>
+  </div>
+</section>
+
+<div class="archive-row">
+  <span>Scegline un altro</span>
+  <span>+</span>
+</div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">01</span><h3>Licenziati</h3><p>Lettere di dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-num">02</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">03</span><h3>Cose Inutili</h3><p>100 definizioni. 1 sola vita.</p></a>
+  <a class="cell" href="#"><span class="cell-num">04</span><h3>Font Detective</h3><p>Sans Serif cosa mi dici?</p></a>
+</div>
+
+<div class="install">
+  <span>Salvami in home / desktop / dock</span>
+  <span>↑</span>
+</div>
+
+</body>
+</html>

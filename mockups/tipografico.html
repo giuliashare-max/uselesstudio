@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variante — Tipografico Puro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#111;--bg:#f0ece3;--paper:#fff;--accent:#c94f3a;--muted:#888}
+html,body{height:100%;font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+/* TOPBAR */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1.5px solid var(--ink)}
+.bar-left{display:flex;align-items:center;gap:8px}
+.logo{width:28px;height:28px;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.logo span{color:var(--bg);font-size:14px;font-weight:800;letter-spacing:-.04em}
+.bar-meta{display:flex;flex-direction:column;gap:1px}
+.bar-brand{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.bar-sub{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.wa{background:#25D366;color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.1em;padding:5px 10px;border:1.5px solid var(--ink)}
+
+/* HERO — tipografia pura, full width */
+.hero{padding:28px 18px 20px;border-bottom:1.5px solid var(--ink)}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+h1{font-size:clamp(52px,20vw,88px);font-weight:800;line-height:.82;letter-spacing:-.05em;text-transform:uppercase}
+h1 .acc{color:var(--accent)}
+.hero-sub{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5;max-width:260px}
+
+/* CARD — compatta, testo dominante */
+.roulette{padding:16px 18px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+.card-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.card-title{font-size:clamp(30px,10vw,48px);font-weight:800;line-height:.85;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+.card-cta{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1a1a1855;margin-top:4px}
+.spin-btn{display:block;width:100%;margin-top:14px;padding:13px;background:var(--ink);color:var(--bg);font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer}
+
+/* ARCHIVE */
+.archive-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1.5px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;background:var(--bg)}
+.archive-toggle span{font-size:18px;font-weight:400;color:var(--muted)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:14px 12px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:5px}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-size:9px;font-weight:700;letter-spacing:.12em;color:#1a1a1844}
+.cell h3{font-size:12px;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.1}
+.cell p{font-size:10px;color:var(--muted);line-height:1.3}
+.cell:nth-child(1){background:var(--accent);color:#fff}
+.cell:nth-child(1) .cell-num,.cell:nth-child(1) p{color:#fff9}
+.cell:nth-child(3){background:#1a1a1a;color:#f0ece3}
+.cell:nth-child(3) .cell-num,.cell:nth-child(3) p{color:#ffffff66}
+
+/* INSTALL BAR */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1.5px solid var(--ink);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.install-left{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.d1{background:var(--accent)}.d2{background:#d9c040;border-radius:2px}.d3{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #6bbcb8;background:none;border-radius:0}
+body{padding-bottom:52px}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-left">
+    <div class="logo"><span>U</span></div>
+    <div class="bar-meta">
+      <span class="bar-brand">© Useless Studio</span>
+      <span class="bar-sub">Micro-app inutili. Necessarie.</span>
+    </div>
+  </div>
+  <span class="wa">WA</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Roulette delle app</div>
+  <h1>Gioca<br>con<br><span class="acc">me.</span></h1>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+</section>
+
+<section class="roulette">
+  <div class="card-label">↑ in rotazione</div>
+  <div class="card-title">Piccione<br>Viaggiatore</div>
+  <div class="card-desc">Sistema di messaggistica lenta.</div>
+  <div class="card-cta">Tocca per giocare</div>
+  <button class="spin-btn">Gira →</button>
+</section>
+
+<div class="archive-toggle">
+  <span>Scegline un altro</span>
+  <span>+</span>
+</div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">01</span><h3>Licenziati</h3><p>Lettere di dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-num">02</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">03</span><h3>Cose Inutili</h3><p>100 definizioni. 1 sola vita.</p></a>
+  <a class="cell" href="#"><span class="cell-num">04</span><h3>Font Detective</h3><p>Sans Serif cosa mi dici?</p></a>
+</div>
+
+<div class="install">
+  <div class="install-left">
+    <span class="dot d1"></span>
+    <span class="dot d2"></span>
+    <span class="d3"></span>
+    <span>Salvami in home</span>
+  </div>
+  <span>↑</span>
+</div>
+
+</body>
+</html>

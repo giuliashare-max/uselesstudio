@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P — Neon Night</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0618;
+  --surface:#130e22;
+  --pink:#ff2d78;
+  --cyan:#00f5ff;
+  --purple:#b44fff;
+  --green:#39ff6e;
+  --ink:#f0eaff;
+  --muted:#7a6a9a;
+}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;min-height:100vh}
+body{padding-bottom:54px}
+
+/* glow utility */
+.glow-pink{text-shadow:0 0 20px var(--pink),0 0 40px var(--pink)}
+.glow-cyan{text-shadow:0 0 20px var(--cyan),0 0 40px var(--cyan)}
+.glow-purple{text-shadow:0 0 16px var(--purple)}
+.border-glow-pink{box-shadow:0 0 0 1px var(--pink),0 0 12px rgba(255,45,120,.3)}
+.border-glow-cyan{box-shadow:0 0 0 1px var(--cyan),0 0 12px rgba(0,245,255,.25)}
+
+/* TOPBAR */
+.bar{background:var(--surface);border-bottom:1px solid rgba(180,79,255,.3);padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
+.bar-left{display:flex;align-items:center;gap:9px}
+.logo{width:26px;height:26px;background:var(--pink);border-radius:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(255,45,120,.6)}
+.logo span{font-size:12px;font-weight:800;color:#fff}
+.bar-brand{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.bar-brand.glow-pink{text-shadow:0 0 10px var(--pink)}
+.bar-sub{font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block}
+.wa{background:none;color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:.1em;border:1px solid var(--cyan);padding:4px 9px;cursor:pointer;font-family:inherit;box-shadow:0 0 8px rgba(0,245,255,.2)}
+
+/* HERO */
+.hero{padding:22px 16px 18px;border-bottom:1px solid rgba(180,79,255,.2);position:relative;overflow:hidden}
+/* griglia neon sullo sfondo */
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(180,79,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(180,79,255,.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.hero-eyebrow{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;position:relative;z-index:1}
+h1{font-size:clamp(46px,17vw,74px);font-weight:800;line-height:.82;letter-spacing:-.05em;text-transform:uppercase;position:relative;z-index:1}
+h1 .l1{color:var(--pink);text-shadow:0 0 24px var(--pink)}
+h1 .l2{color:var(--cyan);text-shadow:0 0 24px var(--cyan)}
+h1 .l3{color:var(--purple);text-shadow:0 0 20px var(--purple)}
+.hero-sub{font-size:10.5px;color:var(--muted);line-height:1.6;margin-top:9px;position:relative;z-index:1}
+
+/* CARD */
+.roulette{padding:14px 16px 13px;border-bottom:1px solid rgba(180,79,255,.2);background:var(--surface);position:relative}
+.card-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan))}
+.card-label{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;padding-top:4px}
+.card-title{font-size:clamp(24px,9vw,38px);font-weight:800;line-height:.86;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word;color:var(--cyan);text-shadow:0 0 20px rgba(0,245,255,.5)}
+.card-desc{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5}
+.card-cta{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,234,255,.3);margin-top:3px}
+.spin-btn{display:block;width:100%;margin-top:13px;padding:13px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;box-shadow:0 0 20px rgba(255,45,120,.4)}
+
+/* ARCHIVE */
+.archive-row{padding:11px 16px;border-bottom:1px solid rgba(180,79,255,.2);display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.archive-row span:last-child{color:var(--pink);font-size:18px;text-shadow:0 0 8px var(--pink)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:12px 10px;border-right:1px solid rgba(180,79,255,.15);border-bottom:1px solid rgba(180,79,255,.15);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px;background:var(--surface)}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-size:8px;font-weight:800;letter-spacing:.14em;color:var(--muted)}
+.cell h3{font-size:12px;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.1}
+.cell p{font-size:9px;color:var(--muted);line-height:1.3}
+.cell:nth-child(1) h3{color:var(--pink);text-shadow:0 0 8px rgba(255,45,120,.4)}
+.cell:nth-child(2) h3{color:var(--cyan);text-shadow:0 0 8px rgba(0,245,255,.3)}
+.cell:nth-child(3) h3{color:var(--green);text-shadow:0 0 8px rgba(57,255,110,.3)}
+.cell:nth-child(4) h3{color:var(--purple);text-shadow:0 0 8px rgba(180,79,255,.4)}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid rgba(0,245,255,.2);padding:9px 16px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);box-shadow:0 -4px 20px rgba(0,245,255,.1)}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-left">
+    <div class="logo"><span>U</span></div>
+    <div>
+      <span class="bar-brand glow-pink">© Useless Studio</span>
+      <span class="bar-sub">Micro-app inutili. Necessarie.</span>
+    </div>
+  </div>
+  <button class="wa">WA</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">// Roulette attiva</div>
+  <h1>
+    <span class="l1">Gio</span><span class="l2">ca</span><br>
+    <span class="l2">con</span><br>
+    <span class="l3">me.</span>
+  </h1>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+</section>
+
+<section class="roulette">
+  <div class="card-line"></div>
+  <div class="card-label">// In rotazione ora</div>
+  <div class="card-title">Piccione<br>Viaggiatore</div>
+  <div class="card-desc">Sistema di messaggistica lenta.</div>
+  <div class="card-cta">↑ tocca per avviare</div>
+  <button class="spin-btn">Gira →</button>
+</section>
+
+<div class="archive-row"><span>Scegline un altro</span><span>+</span></div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">01</span><h3>Licenziati</h3><p>Dimissioni.</p></a>
+  <a class="cell" href="#"><span class="cell-num">02</span><h3>Niente</h3><p>Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">03</span><h3>Cose Inutili</h3><p>100 def.</p></a>
+  <a class="cell" href="#"><span class="cell-num">04</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install"><span>Salvami in home / dock</span><span>↑</span></div>
+</body></html>

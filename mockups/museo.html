@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O — Museo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#111;--bg:#fafafa;--muted:#999;--line:#ddd}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;min-height:100vh}
+body{padding-bottom:50px}
+
+/* TOPBAR — quasi invisibile */
+.bar{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.bar-brand{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.wa{background:none;color:var(--ink);font-size:9px;font-weight:700;letter-spacing:.14em;border:1px solid var(--ink);padding:4px 10px;cursor:pointer;font-family:inherit}
+
+/* HERO — tutto spazio bianco + titolo centrato */
+.hero{padding:48px 20px 40px;text-align:center;border-bottom:1px solid var(--line)}
+.hero-cat{font-size:8px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(48px,17vw,76px);font-weight:400;font-style:italic;line-height:.88;letter-spacing:-.02em;color:var(--ink)}
+.hero-num{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:20px}
+.hero-sub{font-size:10px;color:var(--muted);line-height:1.8;margin-top:8px;max-width:240px;margin-left:auto;margin-right:auto}
+
+/* CARD — come un'opera d'arte con didascalia */
+.roulette{padding:40px 20px 20px;border-bottom:1px solid var(--line)}
+/* opera: grande area bianca vuota con cornice */
+.artwork{border:1px solid var(--line);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:#f5f5f5}
+.artwork-inner{text-align:center}
+.artwork-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(20px,7vw,30px);font-weight:400;font-style:italic;line-height:1.1;word-break:break-word;color:var(--ink)}
+.artwork-year{font-size:9px;color:var(--muted);margin-top:4px;font-style:italic}
+/* didascalia */
+.caption{font-size:9px;color:var(--muted);line-height:1.8}
+.caption strong{display:block;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:8px;color:var(--ink);margin-bottom:2px}
+.spin-btn{display:block;width:100%;margin-top:16px;padding:12px;background:var(--ink);color:var(--bg);font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer}
+
+/* ARCHIVE */
+.archive-row{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* GRID — come un indice da catalogo */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:14px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-size:8px;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.cell h3{font-family:'Playfair Display',Georgia,serif;font-size:14px;font-weight:400;font-style:italic;line-height:1.15}
+.cell p{font-size:8.5px;color:var(--muted);line-height:1.5}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <span class="bar-brand">© Useless Studio — Micro-app inutili. Necessarie.</span>
+  <button class="wa">WA</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-cat">Collezione permanente · Sala I</div>
+  <h1>Gioca<br>con<br>me.</h1>
+  <div class="hero-num">Tav. 001 · Roulette delle app</div>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+</section>
+
+<section class="roulette">
+  <div class="artwork">
+    <div class="artwork-inner">
+      <div class="artwork-title">Piccione<br>Viaggiatore</div>
+      <div class="artwork-year">App · 2024 · Messaggistica</div>
+    </div>
+  </div>
+  <div class="caption">
+    <strong>In rotazione ora</strong>
+    Sistema di messaggistica lenta. Perché certe cose meritano tempo.
+  </div>
+  <button class="spin-btn">Opera successiva →</button>
+</section>
+
+<div class="archive-row"><span>Catalogo completo</span><span>+</span></div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">Tav. I</span><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-num">Tav. II</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">Tav. III</span><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+  <a class="cell" href="#"><span class="cell-num">Tav. IV</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install"><span>Aggiungi alla collezione — home / dock</span><span>↑</span></div>
+</body></html>

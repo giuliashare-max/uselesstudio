@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K — Cartografia</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#2c2416;
+  --bg:#e8dfc8;
+  --paper:#f2ebda;
+  --olive:#5a6b3a;
+  --brown:#8b6914;
+  --contour:#c8b87a;
+  --red:#8b2020;
+  --muted:#7a6a4a;
+}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+body{
+  padding-bottom:52px;
+  background-color:var(--bg);
+  /* linee di contorno topografiche */
+  background-image:
+    radial-gradient(ellipse 80% 40% at 70% 30%, transparent 58%, rgba(139,104,20,.12) 58.5%, transparent 59%),
+    radial-gradient(ellipse 70% 35% at 70% 30%, transparent 48%, rgba(139,104,20,.1) 48.5%, transparent 49%),
+    radial-gradient(ellipse 60% 30% at 70% 30%, transparent 38%, rgba(139,104,20,.1) 38.5%, transparent 39%),
+    radial-gradient(ellipse 50% 25% at 70% 30%, transparent 28%, rgba(139,104,20,.1) 28.5%, transparent 29%);
+}
+
+/* TOPBAR — stile legenda mappa */
+.bar{background:var(--paper);border-bottom:1.5px solid var(--ink);padding:8px 14px;display:flex;align-items:center;justify-content:space-between}
+.bar-left{display:flex;align-items:center;gap:10px}
+.compass{width:26px;height:26px;position:relative;flex-shrink:0}
+.compass-svg{width:26px;height:26px}
+.bar-meta{display:flex;flex-direction:column;gap:1px}
+.bar-brand{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.bar-coords{font-size:7.5px;letter-spacing:.1em;color:var(--muted);font-weight:400}
+.wa{background:var(--olive);color:#fff;font-size:9px;font-weight:800;letter-spacing:.1em;padding:5px 9px;border:1.5px solid var(--ink);cursor:pointer;font-family:inherit}
+
+/* HERO — stile area geografica */
+.hero{padding:18px 14px 14px;border-bottom:1.5px solid var(--ink);position:relative;background:var(--paper)}
+.hero-grid-line{position:absolute;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(var(--contour) 1px,transparent 1px),linear-gradient(90deg,var(--contour) 1px,transparent 1px);background-size:40px 40px;opacity:.18;pointer-events:none}
+.hero-coord{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;position:relative;z-index:1}
+.hero-coord span{color:var(--brown);font-weight:700}
+h1{font-size:clamp(44px,16vw,70px);font-weight:800;line-height:.84;letter-spacing:-.05em;text-transform:uppercase;position:relative;z-index:1}
+h1 .peak{color:var(--red)}
+.hero-sub{font-size:10.5px;color:var(--muted);line-height:1.6;margin-top:9px;position:relative;z-index:1;max-width:260px}
+/* quota altimetrica */
+.hero-alt{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);position:relative;z-index:1}
+.hero-alt::before{content:'';display:inline-block;width:20px;height:1px;background:var(--brown)}
+
+/* CARD — stile punto di interesse */
+.roulette{padding:14px 14px 12px;border-bottom:1.5px solid var(--ink);background:var(--bg)}
+.poi-marker{display:inline-flex;align-items:center;gap:5px;margin-bottom:8px;font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--olive)}
+.poi-dot{width:10px;height:10px;background:var(--red);border-radius:50%;border:2px solid var(--ink);display:inline-block;flex-shrink:0}
+.card-title{font-size:clamp(24px,9vw,38px);font-weight:800;line-height:.88;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-elev{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brown);margin-top:5px}
+.card-desc{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.55}
+.spin-btn{display:block;width:100%;margin-top:12px;padding:12px;background:var(--olive);color:#fff;font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid var(--ink);cursor:pointer}
+
+/* ARCHIVE */
+.archive-row{background:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1.5px solid var(--ink);font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* GRID — stile legenda punti di interesse */
+.grid{display:grid;grid-template-columns:1fr 1fr;background:var(--paper)}
+.cell{padding:12px 10px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.cell:nth-child(2n){border-right:none}
+.cell-tag{display:inline-flex;align-items:center;gap:4px;font-size:7.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.cell-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--contour);border:1.5px solid var(--ink);display:inline-block}
+.cell h3{font-size:12px;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.1}
+.cell p{font-size:9px;color:var(--muted);line-height:1.3}
+.cell:nth-child(1) .cell-tag::before{background:var(--red)}
+.cell:nth-child(1){background:#ddd0aa}
+.cell:nth-child(3){background:#d5d0c0}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--ink);color:var(--bg);border-top:1.5px solid var(--brown);padding:9px 14px;display:flex;align-items:center;justify-content:space-between;font-size:8.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-left">
+    <svg class="compass-svg" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="13" cy="13" r="12" stroke="#2c2416" stroke-width="1.5"/>
+      <polygon points="13,3 15,13 13,11 11,13" fill="#8b2020"/>
+      <polygon points="13,23 15,13 13,15 11,13" fill="#2c2416" opacity=".4"/>
+      <text x="13" y="8" text-anchor="middle" font-size="5" font-weight="800" fill="#2c2416" font-family="Space Grotesk,Arial,sans-serif">N</text>
+    </svg>
+    <div class="bar-meta">
+      <span class="bar-brand">© Useless Studio</span>
+      <span class="bar-coords">45°28'N — 9°11'E · <span style="color:var(--brown)">Mappa v2.6</span></span>
+    </div>
+  </div>
+  <button class="wa">WA</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-line"></div>
+  <div class="hero-coord">Zona: <span>Roulette delle app</span></div>
+  <h1>Gioca<br>con<br><span class="peak">me.</span></h1>
+  <p class="hero-sub">Non scegliere. Lascia decidere a un algoritmo senza scrupoli.</p>
+  <span class="hero-alt">Algoritmo attivo · quota 0 scrupoli</span>
+</section>
+
+<section class="roulette">
+  <div class="poi-marker"><span class="poi-dot"></span>Punto di interesse</div>
+  <div class="card-title">Piccione<br>Viaggiatore</div>
+  <div class="card-elev">↑ messaggistica · distanza: lenta</div>
+  <div class="card-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</div>
+  <button class="spin-btn">Estrai posizione →</button>
+</section>
+
+<div class="archive-row"><span>Tutti i punti di interesse</span><span>+</span></div>
+<div class="grid">
+  <a class="cell" href="#"><div class="cell-tag">01</div><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+  <a class="cell" href="#"><div class="cell-tag">02</div><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><div class="cell-tag">03</div><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+  <a class="cell" href="#"><div class="cell-tag">04</div><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install">
+  <span>Segnami sulla home / dock</span>
+  <span>↑</span>
+</div>
+</body>
+</html>

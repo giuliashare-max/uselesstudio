@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H — Quotidiano</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0d0d0b;--bg:#f5f0e6;--paper:#faf7f0;--muted:#666;--rule:#0d0d0b}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+body{padding-bottom:46px}
+.serif{font-family:'Playfair Display',Georgia,serif}
+
+/* TESTATA — stile quotidiano */
+.testata{padding:10px 14px 0;border-bottom:3px double var(--ink);background:var(--bg)}
+.testata-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.data{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.wa{background:none;color:var(--ink);font-size:8px;font-weight:700;letter-spacing:.12em;border:1px solid var(--ink);padding:3px 8px;cursor:pointer}
+.testata-title{text-align:center;padding:4px 0 8px}
+.testata-title h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,10vw,44px);font-weight:900;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.testata-title .sub{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.testata-rule{display:flex;align-items:center;gap:6px;padding:5px 0}
+.testata-rule hr{flex:1;border:none;border-top:1px solid var(--ink)}
+.testata-rule span{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* HERO — titolo da prima pagina */
+.hero{padding:12px 14px 10px;border-bottom:2px solid var(--ink)}
+.hero-kicker{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.hero-hl{font-family:'Playfair Display',Georgia,serif;font-size:clamp(36px,13vw,58px);font-weight:900;line-height:.88;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:8px}
+.hero-hl em{font-style:italic}
+.col-rule{display:flex;gap:10px}
+.col-rule hr{border:none;border-left:1px solid var(--ink);align-self:stretch}
+.col-left{flex:3}
+.col-right{flex:2}
+.body-text{font-size:10px;line-height:1.7;color:var(--ink);text-align:justify}
+.body-text p+p{margin-top:4px}
+.dropcap::first-letter{font-family:'Playfair Display',Georgia,serif;font-size:2.8em;font-weight:900;float:left;line-height:.8;margin:2px 4px 0 0}
+
+/* CARD — box in colonna */
+.roulette{padding:12px 14px;border-bottom:2px solid var(--ink);background:var(--paper)}
+.box-label{font-size:7px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border-top:2px solid var(--ink);padding-top:6px;margin-bottom:6px}
+.card-hl{font-family:'Playfair Display',Georgia,serif;font-size:clamp(24px,8vw,36px);font-weight:700;font-style:italic;line-height:.92;word-break:break-word;margin-bottom:6px}
+.card-desc{font-size:10px;line-height:1.65;color:var(--muted);text-align:justify}
+.spin-btn{display:block;width:100%;margin-top:10px;padding:10px;background:var(--ink);color:var(--bg);font-family:'Space Grotesk',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer}
+
+/* ARCHIVE */
+.archive-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--ink);font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* GRID — in stile classifiche */
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:10px 10px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:3px}
+.cell:nth-child(2n){border-right:none}
+.cell-num{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:900;color:#0d0d0b22;line-height:1}
+.cell h3{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:700;font-style:italic;line-height:1.15}
+.cell p{font-size:8.5px;color:var(--muted);line-height:1.4}
+.cell:nth-child(1){background:var(--ink);color:var(--bg)}
+.cell:nth-child(1) .cell-num{color:#ffffff22}
+.cell:nth-child(1) p{color:#ffffff88}
+.cell:nth-child(1) h3{color:var(--bg)}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:3px double var(--ink);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="testata">
+  <div class="testata-top">
+    <span class="data">Luglio 2026 — N. 001</span>
+    <button class="wa">WA</button>
+  </div>
+  <div class="testata-title">
+    <h1 class="serif">Useless Studio</h1>
+    <div class="sub">Micro-app inutili. Necessarie. — © Useless Studio</div>
+  </div>
+  <div class="testata-rule">
+    <hr><span>Roulette delle app</span><hr>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-kicker">Oggi in prima pagina</div>
+  <div class="hero-hl serif">Gioca<br>con<br><em>me.</em></div>
+  <div class="col-rule">
+    <div class="col-left">
+      <p class="body-text dropcap">Non scegliere. Lascia decidere a un algoritmo senza scrupoli. Un gioco diverso ogni volta.</p>
+      <p class="body-text">L'app non chiede, non consiglia, non sbaglia: estrae e basta.</p>
+    </div>
+    <hr>
+    <div class="col-right">
+      <p class="body-text" style="font-style:italic;font-size:9px">«Non ho mai scelto cosa fare. Lo fa lei per me.»<br><span style="font-style:normal;font-size:8px;color:var(--muted)">— Un utente qualunque</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="roulette">
+  <div class="box-label">In rotazione ora</div>
+  <div class="card-hl serif">Piccione<br>Viaggiatore</div>
+  <p class="card-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</p>
+  <button class="spin-btn">Gira la roulette →</button>
+</section>
+
+<div class="archive-row">
+  <span>Tutte le app</span>
+  <span>+</span>
+</div>
+<div class="grid">
+  <a class="cell" href="#"><span class="cell-num">I</span><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+  <a class="cell" href="#"><span class="cell-num">II</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+  <a class="cell" href="#"><span class="cell-num">III</span><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+  <a class="cell" href="#"><span class="cell-num">IV</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+</div>
+
+<div class="install">
+  <span>Salvami in home / desktop / dock</span>
+  <span>↑</span>
+</div>
+
+</body>
+</html>

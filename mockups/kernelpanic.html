@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AA — Kernel Panic</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'JetBrains Mono',monospace;background:#0000aa;color:#fff;overflow-x:hidden;min-height:100vh}
+body{padding:0;display:flex;flex-direction:column;min-height:100vh}
+
+/* TOPBAR — barra di sistema in crash */
+.bar{background:#aaaaaa;color:#0000aa;padding:5px 10px;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.04em}
+.bar-left{display:flex;align-items:center;gap:8px}
+.bar-logo{background:#0000aa;color:#fff;font-size:9px;font-weight:800;padding:1px 6px}
+
+/* MAIN — BSoD */
+.bsod{flex:1;padding:20px 18px;display:flex;flex-direction:column}
+
+/* titolo errore */
+.error-icon{font-size:48px;margin-bottom:16px;display:block}
+.error-code{font-size:9px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.5);margin-bottom:10px;text-transform:uppercase}
+h1{font-size:clamp(36px,13vw,58px);font-weight:800;line-height:.84;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:14px}
+.sad-face{font-size:64px;line-height:1;margin-bottom:16px;display:block}
+.error-msg{font-size:11px;line-height:1.8;color:rgba(255,255,255,.85);max-width:340px;margin-bottom:18px}
+.error-msg code{display:block;background:rgba(255,255,255,.15);padding:8px 10px;border-radius:2px;font-size:10px;letter-spacing:.04em;margin:8px 0;color:#fff}
+
+/* progress riavvio */
+.restart-area{margin-bottom:20px}
+.restart-label{font-size:10px;color:rgba(255,255,255,.6);margin-bottom:6px;letter-spacing:.08em}
+.restart-bar{height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.restart-fill{height:100%;background:#fff;border-radius:2px;width:0;animation:restart 8s linear forwards}
+@keyframes restart{0%{width:0}80%{width:90%}100%{width:90%}}
+.restart-pct{font-size:9px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:.1em}
+
+/* CARD — nel "crash dump" */
+.dump-section{border:1px solid rgba(255,255,255,.3);padding:12px 14px;margin-bottom:14px}
+.dump-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+.dump-app{font-size:9px;line-height:1.9;color:rgba(255,255,255,.8)}
+.dump-app .key{color:rgba(255,255,255,.5)}
+.dump-title{font-size:clamp(20px,7vw,30px);font-weight:800;line-height:.9;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word;color:#fff;margin:10px 0 6px}
+.dump-desc{font-size:10px;color:rgba(255,255,255,.65);line-height:1.5}
+
+.play-btn{display:block;width:100%;padding:13px;background:#fff;color:#0000aa;font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;margin-bottom:10px}
+
+/* ALTRI PROCESSI */
+.processes{margin-bottom:10px}
+.proc-label{font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.proc-item{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.75);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1);line-height:1.5}
+.proc-item:last-child{border-bottom:none}
+.proc-status{font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.proc-status.crash{color:#ff6b6b}.proc-status.ok{color:#6bff9e}
+
+/* INSTALL */
+.install{background:#aaaaaa;color:#0000aa;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-left">
+    <span class="bar-logo">US</span>
+    <span>Useless Studio — SYSTEM</span>
+  </div>
+  <span>■ □ □</span>
+</div>
+
+<div class="bsod">
+  <div class="error-code">STOP: 0x000000GI — SCELTA_NON_TROVATA</div>
+  <span class="sad-face">:(</span>
+  <h1>Gioca<br>con<br>me.</h1>
+  <p class="error-msg">
+    Il sistema ha rilevato che stavi per scegliere da solo.<br>
+    Per proteggere l'algoritmo, Useless Studio si è arrestato.
+    <code>EXCEPTION_SCELTA_UTENTE in useless.exe (0x00000042)</code>
+    Lascia decidere all'algoritmo. Nessuno si farà del male.
+  </p>
+
+  <div class="restart-area">
+    <div class="restart-label">Riavvio automatico in corso…</div>
+    <div class="restart-bar"><div class="restart-fill"></div></div>
+    <div class="restart-pct">Raccolta dump di memoria: 90%</div>
+  </div>
+
+  <div class="dump-section">
+    <div class="dump-label">// Processo estratto dal crash dump</div>
+    <div class="dump-app"><span class="key">PROCESS_NAME: </span>piccione_viaggiatore.app<br><span class="key">STATUS: </span>RUNNING (scrupoli: 0)</div>
+    <div class="dump-title">Piccione<br>Viaggiatore</div>
+    <div class="dump-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</div>
+    <button class="play-btn" style="margin-top:12px">Riavvia e gioca →</button>
+  </div>
+
+  <div class="processes">
+    <div class="proc-label">// Processi attivi</div>
+    <div class="proc-item"><span>licenziati.exe</span><span class="proc-status ok">RUNNING</span></div>
+    <div class="proc-item"><span>niente.app</span><span class="proc-status ok">IDLE</span></div>
+    <div class="proc-item"><span>scelta_utente.dll</span><span class="proc-status crash">CRASHED</span></div>
+    <div class="proc-item"><span>font_detective.py</span><span class="proc-status ok">RUNNING</span></div>
+  </div>
+</div>
+
+<div class="install"><span>Aggiungi alla home / dock</span><span>↑</span></div>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V — Motore di Ricerca</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;background:#fff;color:#111;overflow-x:hidden;min-height:100vh;font-size:14px}
+body{padding-bottom:54px}
+
+/* TOPBAR — stile browser */
+.bar{padding:10px 14px;border-bottom:1px solid #e8e8e8;display:flex;align-items:center;gap:8px}
+.url-bar{flex:1;background:#f1f3f4;border-radius:20px;padding:7px 14px;font-size:11px;color:#444;display:flex;align-items:center;gap:6px;border:1px solid transparent}
+.url-bar:focus-within{background:#fff;border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.2)}
+.url-lock{font-size:11px;color:#188038}
+.url-text{flex:1;color:#333;font-size:11px;letter-spacing:.01em}
+.wa{background:none;color:#444;font-size:12px;font-weight:700;padding:6px 10px;border-radius:20px;border:1px solid #ddd;cursor:pointer;font-family:inherit;white-space:nowrap}
+
+/* SEARCH BOX */
+.search-area{padding:20px 14px 14px;text-align:center;border-bottom:1px solid #e8e8e8}
+.brand{font-size:26px;font-weight:800;letter-spacing:-.04em;margin-bottom:14px;color:#111}
+.brand span:nth-child(1){color:#4285f4}
+.brand span:nth-child(2){color:#ea4335}
+.brand span:nth-child(3){color:#fbbc05}
+.brand span:nth-child(4){color:#4285f4}
+.brand span:nth-child(5){color:#34a853}
+.brand span:nth-child(6){color:#ea4335}
+.search-box{display:flex;align-items:center;background:#fff;border:1px solid #ddd;border-radius:24px;padding:10px 16px;gap:10px;box-shadow:0 1px 6px rgba(0,0,0,.1);margin-bottom:10px;text-align:left}
+.search-icon{font-size:16px;color:#9aa0a6;flex-shrink:0}
+.search-text{flex:1;font-size:13px;color:#111;font-weight:500}
+.search-cursor{display:inline-block;width:1.5px;height:14px;background:#111;vertical-align:middle;animation:blink .9s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.search-btn-row{display:flex;gap:8px;justify-content:center}
+.sbtn{background:#f8f9fa;color:#3c4043;font-size:11px;font-weight:700;padding:7px 14px;border-radius:4px;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.sbtn:hover{border-color:#ddd;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+/* SEARCH META */
+.search-meta{padding:8px 14px;border-bottom:1px solid #e8e8e8;font-size:10px;color:#70757a}
+.search-tabs{display:flex;gap:0;overflow-x:auto;padding:0 14px;border-bottom:1px solid #e8e8e8}
+.tab{padding:9px 12px;font-size:11px;font-weight:700;color:#70757a;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent}
+.tab.active{color:#1a73e8;border-bottom-color:#1a73e8}
+
+/* RISULTATI */
+.results{padding:10px 14px}
+.result{margin-bottom:18px}
+.result-url{font-size:10px;color:#202124;display:flex;align-items:center;gap:5px;margin-bottom:2px}
+.result-favicon{width:14px;height:14px;border-radius:2px;background:#111;display:inline-flex;align-items:center;justify-content:center;font-size:8px;color:#fff;flex-shrink:0;font-weight:800}
+.result-domain{font-size:10px;color:#202124}
+.result-path{font-size:10px;color:#70757a}
+.result-title{font-size:15px;font-weight:700;color:#1a0dab;line-height:1.3;margin-bottom:3px;cursor:pointer}
+.result-title:hover{text-decoration:underline}
+.result-snippet{font-size:11px;color:#4d5156;line-height:1.65}
+.result-snippet b{color:#111;font-weight:700}
+
+/* APP CARD (featured) */
+.featured{background:#f8f9fa;border:1px solid #e8e8e8;border-radius:8px;padding:12px 14px;margin-bottom:16px}
+.feat-label{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#70757a;margin-bottom:8px}
+.feat-title{font-size:18px;font-weight:800;letter-spacing:-.03em;text-transform:uppercase;line-height:1;margin-bottom:4px}
+.feat-desc{font-size:11px;color:#4d5156;margin-bottom:10px;line-height:1.5}
+.feat-btn{display:inline-block;background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:8px 16px;border-radius:4px;border:none;cursor:pointer;font-family:inherit}
+
+/* INSTALL */
+.install{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8e8e8;padding:9px 14px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#aaa}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="url-bar">
+    <span class="url-lock">🔒</span>
+    <span class="url-text">uselesstudio.com</span>
+  </div>
+  <button class="wa">WA</button>
+</nav>
+
+<div class="search-area">
+  <div class="brand">
+    <span>U</span><span>s</span><span>e</span><span>l</span><span>e</span><span>s</span><span style="color:#ea4335">s</span>
+  </div>
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <span class="search-text">gioca con me<span class="search-cursor"></span></span>
+  </div>
+  <div class="search-btn-row">
+    <button class="sbtn">Cerca con Useless</button>
+    <button class="sbtn">Mi sento fortunato</button>
+  </div>
+</div>
+
+<div class="search-meta">Circa 6 risultati (0,00 scrupoli)</div>
+<div class="search-tabs">
+  <div class="tab active">Tutto</div>
+  <div class="tab">App</div>
+  <div class="tab">Inutili</div>
+  <div class="tab">Necessarie</div>
+  <div class="tab">Immagini</div>
+</div>
+
+<div class="results">
+  <div class="featured">
+    <div class="feat-label">In rotazione ora</div>
+    <div class="feat-title">Piccione<br>Viaggiatore</div>
+    <div class="feat-desc">Sistema di messaggistica lenta. Perché certe cose meritano tempo.</div>
+    <button class="feat-btn">Gira la roulette →</button>
+  </div>
+
+  <div class="result">
+    <div class="result-url"><span class="result-favicon">U</span><span class="result-domain">uselesstudio.com</span><span class="result-path"> › licenziati</span></div>
+    <div class="result-title">Licenziati — Dimissioni formali in 3 click</div>
+    <div class="result-snippet">Ti senti <b>intrappolato</b>? Lascia che sia l'app a scrivere la lettera. Nessuna responsabilità inclusa...</div>
+  </div>
+
+  <div class="result">
+    <div class="result-url"><span class="result-favicon">U</span><span class="result-domain">uselesstudio.com</span><span class="result-path"> › niente</span></div>
+    <div class="result-title">Niente — Tu parli. Lei finge di ascoltare.</div>
+    <div class="result-snippet">Un'app che <b>non fa niente</b>. Proprio niente. Ma almeno ti ascolta. Forse.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-url"><span class="result-favicon">U</span><span class="result-domain">uselesstudio.com</span><span class="result-path"> › font-detective</span></div>
+    <div class="result-title">Font Detective — Riconosci il Sans Serif</div>
+    <div class="result-snippet">Sei in grado di distinguere un <b>Helvetica</b> da un Arial? Scoprilo. Forse non sei chi pensi di essere.</div>
+  </div>
+</div>
+
+<div class="install"><span>Salvami in home / dock</span><span>↑</span></div>
+</body></html>

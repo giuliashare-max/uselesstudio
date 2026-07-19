@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout Minimale</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  font-family:'Space Grotesk',Arial,sans-serif;
+  background:#fff;
+  color:#111;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body{
+  display:grid;
+  grid-template-rows:auto 1fr auto auto;
+  min-height:100vh;
+}
+
+/* ─── TOPBAR ─────────────────────────── */
+nav{
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #111;
+}
+.brand{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.wa{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    background:none;border:none;cursor:pointer;font-family:inherit;color:#111}
+
+/* ─── HERO ───────────────────────────── */
+main{
+  padding:32px 20px 28px;
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:32px;
+  border-bottom:1px solid #111;
+}
+
+h1{
+  font-size:clamp(52px,19vw,82px);
+  font-weight:800;
+  line-height:.82;
+  letter-spacing:-.05em;
+  text-transform:uppercase;
+  align-self:start;
+}
+
+/* roulette card — una riga */
+.card{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px}
+.card-text{}
+.card-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#aaa;margin-bottom:6px}
+.card-title{font-size:clamp(18px,6vw,26px);font-weight:800;line-height:.9;letter-spacing:-.04em;text-transform:uppercase;word-break:break-word}
+.card-desc{font-size:10px;color:#888;margin-top:5px;line-height:1.5;max-width:220px}
+.spin{
+  padding:12px 18px;
+  background:#111;color:#fff;
+  font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  white-space:nowrap;
+  align-self:end;
+  flex-shrink:0;
+}
+
+/* ─── ARCHIVE ────────────────────────── */
+.archive{border-bottom:1px solid #111}
+.archive summary{
+  padding:14px 20px;
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  cursor:pointer;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.archive summary::after{content:'↓';font-size:14px;font-weight:400}
+.archive[open] summary::after{content:'↑'}
+.grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid #111;
+}
+.mini{
+  padding:14px 16px;
+  border-right:1px solid #111;border-bottom:1px solid #111;
+  text-decoration:none;color:#111;
+  display:flex;flex-direction:column;gap:4px;
+}
+.mini:nth-child(2n){border-right:none}
+.mini:nth-last-child(-n+2){border-bottom:none}
+.mini-num{font-size:8px;font-weight:800;letter-spacing:.16em;color:#ccc}
+.mini h3{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.1}
+.mini p{font-size:9px;color:#888;line-height:1.35}
+
+/* ─── INSTALL ────────────────────────── */
+footer{
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">© Useless Studio</span>
+  <button class="wa">WA</button>
+</nav>
+
+<main>
+  <h1>Gioca<br>con<br>me.</h1>
+
+  <div class="card">
+    <div class="card-text">
+      <div class="card-label">In rotazione</div>
+      <div class="card-title">Piccione<br>Viaggiatore</div>
+      <div class="card-desc">Sistema di messaggistica lenta.</div>
+    </div>
+    <button class="spin">Gira →</button>
+  </div>
+</main>
+
+<details class="archive">
+  <summary>Scegline un altro</summary>
+  <div class="grid">
+    <a class="mini" href="#"><span class="mini-num">01</span><h3>Licenziati</h3><p>Dimissioni formali.</p></a>
+    <a class="mini" href="#"><span class="mini-num">02</span><h3>Niente</h3><p>Tu parli. Lei finge.</p></a>
+    <a class="mini" href="#"><span class="mini-num">03</span><h3>Cose Inutili</h3><p>100 def. 1 vita.</p></a>
+    <a class="mini" href="#"><span class="mini-num">04</span><h3>Font Detective</h3><p>Sans Serif?</p></a>
+    <a class="mini" href="#"><span class="mini-num">05</span><h3>Piccione</h3><p>Messaggistica lenta.</p></a>
+    <a class="mini" href="#"><span class="mini-num">06</span><h3>Final</h3><p>Trova il file giusto.</p></a>
+  </div>
+</details>
+
+<footer>
+  <span>Salvami in home / dock</span>
+  <span>↑</span>
+</footer>
+
+</body>
+</html>

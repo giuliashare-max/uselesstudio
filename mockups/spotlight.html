@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EE — Spotlight</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Space Grotesk',Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+body{
+  background:#1a1a1a;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:120px;
+  padding-bottom:0;
+}
+
+/* BARRA SPOTLIGHT */
+.spotlight{width:calc(100% - 40px);max-width:390px}
+
+.search-bar{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(40,40,40,.95);
+  backdrop-filter:blur(40px);
+  border-radius:14px 14px 0 0;
+  padding:14px 18px;
+  border:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.search-icon{font-size:20px;opacity:.5;flex-shrink:0}
+.search-input{flex:1}
+.search-typed{font-size:22px;font-weight:500;color:#fff;letter-spacing:-.01em;display:flex;align-items:center;gap:0}
+.search-cursor{display:inline-block;width:2px;height:22px;background:#fff;margin-left:1px;animation:blink .9s step-end infinite;vertical-align:middle;border-radius:1px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.search-clear{width:20px;height:20px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;opacity:.6;cursor:pointer;flex-shrink:0}
+
+/* RISULTATI */
+.results{
+  background:rgba(35,35,35,.97);
+  backdrop-filter:blur(40px);
+  border-radius:0 0 14px 14px;
+  border:1px solid rgba(255,255,255,.1);
+  border-top:none;
+  overflow:hidden;
+}
+
+/* risultato hero — selezionato */
+.result-hero{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;
+  background:rgba(10,132,255,.85);
+}
+.rh-icon{width:44px;height:44px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.rh-info{flex:1}
+.rh-category{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:2px}
+.rh-title{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.rh-sub{font-size:10px;color:rgba(255,255,255,.65);margin-top:2px}
+.rh-enter{font-size:10px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:3px;flex-shrink:0}
+.enter-key{background:rgba(255,255,255,.2);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700}
+
+/* sezione risultati */
+.section-label{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:10px 14px 4px}
+.result-row{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer}
+.result-row:hover{background:rgba(255,255,255,.06)}
+.result-row.sel{background:rgba(10,132,255,.4)}
+.rr-icon{width:30px;height:30px;background:rgba(255,255,255,.08);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.rr-info{flex:1}
+.rr-title{font-size:12px;font-weight:700;color:#fff}
+.rr-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.rr-arrow{font-size:12px;color:rgba(255,255,255,.2)}
+
+/* separatore */
+.sep{height:1px;background:rgba(255,255,255,.06);margin:0 14px}
+
+/* TITOLO sopra lo spotlight */
+.title-above{text-align:center;margin-bottom:28px}
+h1{font-size:clamp(36px,13vw,56px);font-weight:800;line-height:.86;letter-spacing:-.05em;text-transform:uppercase;color:#fff}
+.title-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:8px;letter-spacing:.06em}
+
+/* hotkey hint */
+.hint{margin-top:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.1em;display:flex;align-items:center;justify-content:center;gap:6px}
+.key{background:rgba(255,255,255,.08);border-radius:4px;padding:3px 7px;font-size:9px;font-weight:700;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.08)}
+
+/* footer */
+.footer{position:fixed;bottom:0;left:0;right:0;padding:12px 20px;text-align:center;font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<div class="title-above">
+  <h1>Gioca<br>con<br>me.</h1>
+  <p class="title-sub">© Useless Studio — Micro-app inutili. Necessarie.</p>
+</div>
+
+<div class="spotlight">
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <div class="search-input">
+      <div class="search-typed">gioca con me<span class="search-cursor"></span></div>
+    </div>
+    <div class="search-clear">✕</div>
+  </div>
+
+  <div class="results">
+    <div class="result-hero">
+      <div class="rh-icon">🕊️</div>
+      <div class="rh-info">
+        <div class="rh-category">App estratta</div>
+        <div class="rh-title">Piccione Viaggiatore</div>
+        <div class="rh-sub">uselesstudio.com — Messaggistica lenta</div>
+      </div>
+      <div class="rh-enter"><span class="enter-key">↵</span></div>
+    </div>
+
+    <div class="section-label">Altre app</div>
+    <div class="result-row">
+      <div class="rr-icon">📄</div>
+      <div class="rr-info"><div class="rr-title">Licenziati</div><div class="rr-sub">Dimissioni formali in 3 click</div></div>
+      <span class="rr-arrow">›</span>
+    </div>
+    <div class="sep"></div>
+    <div class="result-row">
+      <div class="rr-icon">🤫</div>
+      <div class="rr-info"><div class="rr-title">Niente</div><div class="rr-sub">Tu parli. Lei finge.</div></div>
+      <span class="rr-arrow">›</span>
+    </div>
+    <div class="sep"></div>
+    <div class="result-row">
+      <div class="rr-icon">📚</div>
+      <div class="rr-info"><div class="rr-title">Cose Inutili</div><div class="rr-sub">100 definizioni. 1 vita.</div></div>
+      <span class="rr-arrow">›</span>
+    </div>
+    <div class="sep"></div>
+    <div class="result-row">
+      <div class="rr-icon">🔍</div>
+      <div class="rr-info"><div class="rr-title">Font Detective</div><div class="rr-sub">Sans Serif?</div></div>
+      <span class="rr-arrow">›</span>
+    </div>
+  </div>
+</div>
+
+<div class="hint">
+  <span class="key">⌘</span><span style="color:rgba(255,255,255,.15)">Spazio</span>
+  <span>per girare la roulette</span>
+</div>
+
+<div class="footer">Salvami in home / dock ↑</div>
+</body>
+</html>
